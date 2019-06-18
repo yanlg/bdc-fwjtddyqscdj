@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="author" content="湖北蚂蚁云服">
+	<meta name="apple-mobile-web-app-capable" content="yes"/>
+	<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+	<meta name="format-detection" content="telephone=no, email=no"/>
+	<meta name="renderer" content="webkit">
+	<title>不动产预抵押申请</title>
+	<script src="https://cdn.bootcss.com/eruda/1.2.4/eruda.min.js"></script>
+	<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+
+</head>
+<body>
+
+	<div id="app" v-cloak>
+		<div class="container">
+			<div class="handle-step">
+				<!--头部切换-->
+				<div class="tab-bar" v-show="isSubmit == 3">
+					<ul>
+						<li>
+							<span :class="{'tab-checked':tabFlag == 0}" @click="changeTab(0)">义务人信息</span>
+							<span :class="{'tab-checked':tabFlag == 1}" @click="changeTab(1)">权利人信息</span>
+							<span :class="{'tab-checked':tabFlag == 2}" @click="changeTab(2)">不动产信息</span>
+							<span :class="{'tab-checked':tabFlag == 3}" @click="changeTab(3)">抵押合同信息</span>
+						</li>
+					</ul>
+				</div>
+				<div class="tab-bar" v-show="isSubmit == 0">
+					<ul>
+						<li>
+							<span :class="{'tab-checked':tabFlag == 0}">义务人信息</span>
+							<span :class="{'tab-checked':tabFlag == 1}">权利人信息</span>
+							<span :class="{'tab-checked':tabFlag == 2}">不动产信息</span>
+							<span :class="{'tab-checked':tabFlag == 3}">抵押合同信息</span>
+						</li>
+					</ul>
+				</div>
+				<div class="tab-bar" v-show="isSubmit == 1">
+					<ul>
+						<li>
+							<span :class="{'tab-checked':tabFlag == 0}" @click="changeTab(0)">义务人信息</span>
+							<span :class="{'tab-checked':tabFlag == 1}" @click="changeTab(1)">权利人信息</span>
+							<span :class="{'tab-checked':tabFlag == 2}">不动产信息</span>
+							<span :class="{'tab-checked':tabFlag == 3}">抵押合同信息</span>
+						</li>
+					</ul>
+				</div>
+				<div class="tab-bar" v-show="isSubmit == 2">
+					<ul>
+						<li>
+							<span :class="{'tab-checked':tabFlag == 0}" @click="changeTab(0)">义务人信息</span>
+							<span :class="{'tab-checked':tabFlag == 1}" @click="changeTab(1)">权利人信息</span>
+							<span :class="{'tab-checked':tabFlag == 2}" @click="changeTab(2)">不动产信息</span>
+							<span :class="{'tab-checked':tabFlag == 3}">抵押合同信息</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!--form-->
+			<div class="bdc-form" v-show="tabFlag == 0">
+				<h3>义务人信息</h3>
+				<div class="bdc-form-input">
+					<p>
+						<label for="">姓名</label>
+						<input type="text" placeholder="请输入姓名" :readonly="qlrInfo.isReadOnly == true" v-model="qlrInfo.qlrmc">
+					</p>
+				</div>
+				<div class="bdc-form-input">
+					<p>
+						<label for="">身份证号</label>
+						<input type="text" placeholder="请输入身份证号" :readonly="qlrInfo.isReadOnly == true" v-model="qlrInfo.zjhm" maxlength="18">
+					</p>
+				</div>
+                <div class="bdc-form-input">
+                    <p @click="chooseSex('0',0)">
+                        <label for="">选择性别</label>
+                        <input type="text" placeholder="请选择性别" readonly="readonly" v-model="qlrInfo.sex">
+                    </p>
+                </div>
+				<div class="bdc-form-input">
+					<p>
+						<label for="">联系电话</label>
+						<input type="number" placeholder="请输入联系电话" :readonly="qlrInfo.isReadOnly == true" v-model="qlrInfo.dh" maxlength="11">
+					</p>
+				</div>
+				<div class="bdc-form-input">
+					<p>
+						<label for="">通讯地址</label>
+						<input type="text" placeholder="请输入通讯地址" :readonly="qlrInfo.isReadOnly == true" v-model="qlrInfo.dz">
+					</p>
+				</div>
+				<div class="bdc-form-input">
+					<p @click="chooseGyfs('0',0)">
+						<label for="">共有方式</label>
+						<input type="text" placeholder="请选择共有方式" readonly="readonly" v-model="qlrInfo.gyfs1">
+					</p>
+				</div>
+				<div class="bdc-form-input">
+					<p>
+						<label for="">不动产证号</label>
+						<input type="text" placeholder="请输入不动产证号"  :readonly="qlrInfo.isReadOnly == true" v-model="qlrInfo.ybdcqzh">
+					</p>
+				</div>
+				<!--<p style="background-color:#fff;padding:.1rem .3rem;color: #E53030;font-size: .26rem">*(0:单独所有；1:共同共有；2:按份共有；3:其它共有；)</p>-->
+				<div class="add-user" v-if="qlrList.length == 0">
+					<p @click="showAddContain" style="color: #929292;"><i class="add-icon"></i>添加共有义务人</p>
+				</div>
+				<div v-if="qlrList.length != 0">
+					<h3>共有义务人信息</h3>
+					<div v-for="(item,index) in qlrList" :key="index">
+						<div class="bdc-form-input">
+							<p>
+								<label for="">姓名</label>
+								<input type="text" placeholder="请输入姓名" :readonly="item.isReadOnly == true" v-model="item.qlrmc">
+							</p>
+						</div>
+						<div class="bdc-form-input">
+							<p>
+								<label for="">身份证号</label>
+								<input type="text" placeholder="请输入身份证号" :readonly="item.isReadOnly === true" v-model="item.zjhm">
+							</p>
+						</div>
+						<div class="bdc-form-input">
+							<p @click="chooseSex('1',index)">
+								<label for="">选择性别</label>
+								<input type="text" placeholder="请选择性别" readonly="readonly" v-model="item.sex">
+							</p>
+						</div>
+						<div class="bdc-form-input">
+							<p>
+								<label for="">联系电话</label>
+								<input type="number" placeholder="请输入联系电话" :readonly="item.isReadOnly === true" v-model="item.dh" maxlength="11">
+							</p>
+						</div>
+						<div class="bdc-form-input">
+							<p>
+								<label for="">通讯地址</label>
+								<input type="text" placeholder="请输入通讯地址" :readonly="item.isReadOnly === true" v-model="item.dz">
+							</p>
+						</div>
+						<div class="bdc-form-input">
+							<p @click="chooseGyfs('1',index)">
+								<label for="">共有方式</label>
+								<input type="text" placeholder="请选择共有方式" readonly="readonly"  v-model="item.gyfs1">
+							</p>
+						</div>
+                        <div class="bdc-form-input">
+                            <p>
+                                <label for="">不动产证号</label>
+                                <input type="text" placeholder="请输入不动产证号" readonly="readonly" v-model="qlrInfo.ybdcqzh">
+                            </p>
+                        </div>
+						<!--扫脸-->
+						<div class="bdc-face" v-if="item.isFace == 0" @click="alipayFace(index)">
+							<p class="no-init-color"><i class="face-icon"></i>去采集当前共有义务人脸信息</p>
+						</div>
+						<div class="bdc-face" v-if="item.isFace == 1">
+							<p class="is-init-color"><i class="face-icon"></i>当前共有义务人人脸信息采集完成</p>
+						</div>
+					</div>
+					<div class="add-user">
+						<p @click="addPublicUser"><i class="add-icon"></i>继续添加共有义务人</p>
+					</div>
+				</div>
+				<div class="button-primary-normal">
+					<button :disabled="isFastClick == true" @click="dynamicTab(1)">下一步</button>
+				</div>
+			</div>
+			<!--义务人-->
+			<div class="bdc-list" v-show="tabFlag == 1">
+					<h3>权利人信息</h3>
+					<div class="bdc-list-item">
+						<p>
+							<span>权利人姓名（名称）</span>
+							<span>{{qlrxx.QLRMC}}</span>
+						</p>
+					</div>
+					<div class="bdc-list-item">
+						<p>
+							<span>身份证件种类</span>
+							<span>{{qlrxx.ZJZL | transCardType}}</span>
+						</p>
+					</div>
+					<div class="bdc-list-item">
+						<p>
+							<span>证件号</span>
+							<span>{{qlrxx.ZJHM}}</span>
+						</p>
+					</div>
+					<div class="bdc-list-item">
+						<p>
+							<span>联系电话</span>
+							<span>{{qlrxx.DH}}</span>
+						</p>
+					</div>
+					<div class="bdc-list-item">
+						<p>
+							<span>邮政编码</span>
+							<span>{{qlrxx.QLRYZBM}}</span>
+						</p>
+					</div>
+
+					<div class="bdc-list-item">
+						<p>
+							<span>通讯地址</span>
+							<span>{{qlrxx.DZ }}</span>
+						</p>
+					</div>
+
+					<div class="button-primary-normal" @click="dynamicTab(2)">
+						<button>下一步</button>
+					</div>
+				</div>
+			<!--不动产信息-->
+			<div class="bdc-info" v-show="tabFlag == 2">
+
+				<div class="bdc-list">
+					<div>
+						<h3>不动产信息</h3>
+						<div class="bdc-list-item">
+							<p>
+								<span>座落</span>
+								<span>{{bdcxx.zl}}</span>
+							</p>
+						</div>
+						<div class="bdc-list-item">
+							<p>
+								<span>行政区划代码</span>
+								<span>{{bdcxx.qxdm}}</span>
+							</p>
+						</div>
+						<div class="bdc-list-item">
+							<p>
+								<span>不动产单元号</span>
+								<span>{{bdcxx.bdcdyh}}</span>
+							</p>
+						</div>
+						<div class="bdc-list-item">
+							<p>
+								<span>不动产权证号</span>
+								<span style="margin-left: 0;">{{bdcxx.ybdcqzh}}</span>
+							</p>
+						</div>
+						<div class="bdc-list-item">
+							<p>
+								<span>用途（房屋）</span>
+								<span>{{bdcxx.yt}}</span>
+							</p>
+						</div>
+						<div class="bdc-list-item">
+							<p>
+								<span>面积（房屋）</span>
+								<span>{{bdcxx.mj}}平方米</span>
+							</p>
+						</div>
+						<div class="bdc-list-item">
+							<p>
+								<span>不动产类型</span>
+								<span>{{bdcxx.bdclx == 2 ? '土地和房屋' : '未知'}}</span>
+							</p>
+						</div>
+
+						<!--<div class="read-protocol">
+							<div class="read-protocol-content">
+								<i class="has-agree" @click="changeSelectType('false')" v-show="isAgree === true"></i>
+								<i class="not-agree" @click="changeSelectType('true')" v-show="isAgree === false"></i>
+								<p>
+									<span>确认以上内容与所持合同一致</span>
+								</p>
+							</div>
+						</div>-->
+						<div class="button-primary-normal" @click="dynamicTab(3)">
+							<button>下一步</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="bdc-form" v-show="tabFlag == 3">
+				<h3>抵押合同信息填写</h3>
+				<div class="bdc-form-input">
+					<p>
+						<label for="">被担保债权数额（万元）</label>
+						<input type="text" placeholder="请输入被担保债券数额" :readonly="qlrInfo.isReadOnly == true" v-model="dydata.bdbzqse">
+
+					</p>
+				</div>
+				<div class="bdc-form-input">
+					<p>
+						<label for="" >债券履行期限</label>
+                        <input type="text" v-model="dydata.zwlxqxs" placeholder="债券履行期限起" style="width: 2rem;text-align:center;" :readonly="false" @click="commanSelectTime('0')" />
+                        <span>-</span>
+                        <input type="text" v-model="dydata.zwlxqxz" placeholder="债券履行期限止" style="width: 2rem;text-align:center;" :readonly="false" @click="commanSelectTime('1')" />
+
+                    </p>
+				</div>
+				<div class="bdc-form-input">
+					<p >
+						<label for="">抵押物面积（㎡）</label>
+						<input type="text" placeholder="请输入抵押物面积" :readonly="qlrInfo.isReadOnly == true" v-model="dydata.dywmj">
+					</p>
+				</div>
+
+				<div class="read-protocol">
+					<div class="read-protocol-content">
+						<i class="has-agree" @click="changeSelectType('false')" v-show="isAgree === true"></i>
+						<i class="not-agree" @click="changeSelectType('true')" v-show="isAgree === false"></i>
+						<p>
+							<span>确认以上内容与所持合同一致</span>
+						</p>
+					</div>
+				</div>
+				<div class="button-primary-normal" style="margin-top:0;" @click="submit">
+					<button :disabled="isAgree == false">下一步</button>
+				</div>
+			</div>
+
+		</div>
+		<!--loading animation-->
+		<div class="loading" v-show="loading">
+			<div class="loadbox">
+				<div class="m-load2">
+					<div class="line">
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+					</div>
+					<div class="circlebg"></div>
+				</div>
+				<p>数据加载中</p>
+			</div>
+		</div>
+	</div>
+	<script src="https://a.alipayobjects.com/g/h5-lib/alipayjsapi/3.0.0/alipayjsapi.min.js"></script>
+
+	<script>
+
+
+		window.onload = function () {
+            function ready(callback) {
+                // 如果jsbridge已经注入则直接调用
+                if (window.AlipayJSBridge) {
+                    callback && callback();
+                } else {
+                    // 如果没有注入则监听注入的事件
+                    document.addEventListener('AlipayJSBridgeReady', callback, false);
+                }
+            }
+            //隐藏右上角菜单栏
+            AlipayJSBridge.call('hideOptionMenu');
+        }
+	</script>
+</body>
+
+</html>

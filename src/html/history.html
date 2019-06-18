@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="author" content="湖北蚂蚁云服">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no, email=no"/>
+    <meta name="renderer" content="webkit">
+    <title>不动产预登记申请记录</title>
+</head>
+<body>
+<div id="app" v-cloak>
+    <div class="container">
+        <div class="history">
+            <div class="history-list">
+                <ul>
+                    <li class="flex-contain" @click="goStatusPage(2)">
+                        <div class="history-list-left flex-box-1">
+                            <p>张三</p>
+                            <p>2016-12-22</p>
+                        </div>
+                        <div class="history-list-right flex-box-1">
+                            <p>审核中</p>
+                        </div>
+                        <div class="history-list-icon">
+                            <i></i>
+                        </div>
+                    </li>
+                    <li class="flex-contain" @click="goStatusPage(1)">
+                        <div class="history-list-left flex-box-1">
+                            <p>张三</p>
+                            <p>2016-12-22</p>
+                        </div>
+                        <div class="history-list-right flex-box-1">
+                            <p class="success">审核通过</p>
+                        </div>
+                        <div class="history-list-icon">
+                            <i></i>
+                        </div>
+                    </li>
+                    <li class="flex-contain" @click="goStatusPage(3)">
+                        <div class="history-list-left flex-box-1">
+                            <p>张三</p>
+                            <p>2016-12-22</p>
+                        </div>
+                        <div class="history-list-right flex-box-1">
+                            <p class="fail">审核失败</p>
+                        </div>
+                        <div class="history-list-icon">
+                            <i></i>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

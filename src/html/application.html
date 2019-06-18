@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>不动产预抵押申请</title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="author" content="湖北蚂蚁云服">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no, email=no"/>
+    <meta name="renderer" content="webkit">
+    <script src="https://cdn.bootcss.com/eruda/1.2.4/eruda.min.js"></script>
+</head>
+<body>
+<div id="app" v-cloak>
+    <div class="container" v-show="checkAgreeMent == false">
+        <div class="application">
+            <div class="application-banner">
+                <img src="../img/depart_icon.png" alt="">
+                <p>襄阳市不动产登记局</p>
+            </div>
+        </div>
+        <div class="application-form">
+            <div class="application-form-input">
+                <p>
+                    <label for="">姓      名</label>
+                    <input type="text" readonly="readonly" placeholder="" v-model="userInfo.user_name">
+                </p>
+            </div>
+            <div class="application-form-input">
+                <p>
+                    <label for="">身份证号</label>
+                    <input type="text" readonly="readonly" placeholder="" v-model="userInfo.cert_no">
+                </p>
+            </div>
+        </div>
+        <div class="read-protocol">
+            <div class="read-protocol-content">
+                <i class="has-agree" @click="changeSelectType('false')" v-show="isAgree === true"></i>
+                <i class="not-agree" @click="changeSelectType('true')" v-show="isAgree === false"></i>
+                <p>
+                    我已经阅读并同意<span @click="showAgreeMent">《注册协议》</span>
+                </p>
+            </div>
+        </div>
+        <div class="button-primary-normal" style="padding-bottom: 0;margin-top:0;">
+            <button :disabled="isAgree == false" @click="toAlipayFace">开始采集人脸信息</button>
+        </div>
+        <!--<div class="index-history" style="margin-top: .4rem">
+            <div class="history">
+                <h3 class="flex-contain history-list">
+                    <div class="history-left-icon">
+                        <i></i>
+                    </div>
+                    <div class="flex-box-1">历史记录查询</div>
+                    <span @click="toHistoryPage">更多</span>
+                    <div class="history-list-icon">
+                        <i></i>
+                    </div>
+                </h3>
+                <div class="history-list">
+                    <ul>
+                        <li class="flex-contain" @click="goStatusPage(2)">
+                            <div class="history-list-left flex-box-1">
+                                <p>张三</p>
+                                <p>2016-12-22</p>
+                            </div>
+                            <div class="history-list-right flex-box-1">
+                                <p>审核中</p>
+                            </div>
+                        </li>
+                        <li class="flex-contain" @click="goStatusPage(1)">
+                            <div class="history-list-left flex-box-1">
+                                <p>张三</p>
+                                <p>2016-12-22</p>
+                            </div>
+                            <div class="history-list-right flex-box-1">
+                                <p class="success">审核通过</p>
+                            </div>
+                        </li>
+                        <li class="flex-contain" @click="goStatusPage(3)">
+                            <div class="history-list-left flex-box-1">
+                                <p>张三</p>
+                                <p>2016-12-22</p>
+                            </div>
+                            <div class="history-list-right flex-box-1">
+                                <p class="fail">审核失败</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>-->
+    </div>
+    <div class="agreement" v-show="checkAgreeMent == true">
+        <h3>襄阳市不动产线上办理提交信息真实性承诺书</h3>
+        <div class="agreement-content">
+            <p>为了确保不动产线上办理平台信息安全配合做好不动产信息审核工作，本人郑重做一下承诺：</p>
+            <p>本人在襄阳市不动产线上办理平台提供信息，包括个人有效身份证、不动产证书等业务材料的电子图片均真实、客观、准确、可靠，无伪造、编造和隐瞒等虚假行为。</p>
+            <p>本人承诺承担审核不合格，管理部门惩罚等一切后果。</p>
+            <p>本人承诺同意不动产登记中心确定的业务回复时限（注销抵押、一般抵押为工作日内24小时；预抵押（或预告登记）为三个工作日）。</p>
+            <p>本人承诺遵守襄阳市不动产线上办理平台业务处理规则。</p>
+            <p>本承诺书自襄阳市不动产线上办理平台提交确认之起生效，具有法律效力。</p>
+        </div>
+        <div class="agreement-btn">
+            <span class="exit" @click="exit">退出注册</span>
+            <span class="agree" @click="agree">同意条款</span>
+        </div>
+    </div>
+    <!--loading animation   -->
+    <div class="loading" v-show="loading">
+        <div class="loadbox">
+            <div class="m-load2">
+                <div class="line">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <div class="circlebg"></div>
+            </div>
+            <p>数据加载中</p>
+
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
