@@ -34,7 +34,7 @@ new Vue({
         getAliAuthUrl(){
             $.ajax({
                 type:"GET",
-                url:"https://xysb.anthb.cn:1502/bdcydysq-server/api/aliAuth/getAliAuthUrl",
+                url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/aliAuth/getAliAuthUrl",
                 data:{},
                 contentType : "application/json",
                 headers: {

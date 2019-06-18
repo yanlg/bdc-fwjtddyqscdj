@@ -37,7 +37,7 @@ new Vue({
         getHistory(){
             $.ajax({
                 type:"GET",
-                url:"https://xysb.anthb.cn:1502/bdcydysq-server/api/bdcydj/queryInfo",
+                url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/fwjtddyqscdj/queryInfo",
                 data:{
                     // qlrmc:userName,
                     // qlrzjbh:certNo

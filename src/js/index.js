@@ -233,7 +233,7 @@ new Vue({
             var sign = self.getUrlParams("sign")
             $.ajax({
                 type:"GET",
-                url:"https://xysb.anthb.cn:1502/bdcydysq-server/api/aliAuth/zhima",
+                url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/aliAuth/zhima",
                 data:{
                     params:params,
                     sign:sign
@@ -279,8 +279,8 @@ new Vue({
             self.loading = true
             $.ajax({
                 type:"GET",
-                // url:"https://xysb.anthb.cn:1502/bdcydysq-server/api/bdcydj/queryInfo",
-                url:"https://xysb.anthb.cn:1502/bdcydysq-server/api/bdcydy/queryInfo",
+                url:"http://localhost:8082/fwjtddyqscdj-server/api/fwjtddyqscdj/queryInfo",
+                // url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/fwjtddyqscdj/queryInfo",
                 data:{
                     qlrmc:self.qlrInfo.qlrmc,
                     qlrzjbh:self.qlrInfo.zjhm,
@@ -334,7 +334,7 @@ new Vue({
             self.loading = true
             $.ajax({
                 type:"GET",
-                url:"https://xysb.anthb.cn:1502/bdcydysq-server/api/bdcydj/queryHtInfo",
+                url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/fwjtddyqscdj/queryHtInfo",
                 data:{
                     hth:hth,
                     // hth:"42060219901120002X"
@@ -392,7 +392,10 @@ new Vue({
         postQlrxx(){
             var self = this
 
-
+            self.dydata.bdbzqse = 20;
+            self.dydata.zwlxqxs = "2019-06-10"
+            self.dydata.zwlxqxz = "2019-07-05"
+            self.dydata.dywmj = "94.87"
             if(self.dydata.bdbzqse==''){
                 alert('被担保债券数额不能为空');
                 return ;
@@ -413,10 +416,13 @@ new Vue({
             }
 
             self.loading = true
+            debugger
+            self.qlrInfo.slid = self.qlrxx.SLID
             // var hth =
             $.ajax({
                 type:"POST",
-                url:"https://xysb.anthb.cn:1502/bdcydysq-server/api/bdcydy/apply/submit",
+                // url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/fwjtddyqscdj/apply/submit",
+                url:"http://localhost:8082/fwjtddyqscdj-server/api/fwjtddyqscdj/apply/submit",
                 data:JSON.stringify({
                     applyInfo: {			// 申请人信息
                         sqrXm:self.userName,			// 申请人姓名
@@ -464,6 +470,15 @@ new Vue({
             var list = self.qlrList
             var count = self.addCount
             var qlrId = self .qlrInfo.zjhm
+
+
+            list[count].gyfs1 = 1;
+            list[count].sex  = "男"
+            list[count].qlrmc="黄明清"
+            list[count].zjhm ="420683196509080947"
+            list[count].dh = "13810234984"
+            list[count].dz ="湖北省襄阳市"
+
             console.log(count)
             if(list[count].qlrmc == ''){
                 alert("请输入共有义务人姓名")
@@ -503,6 +518,7 @@ new Vue({
                 alert("请完成当前共有权利人信息填写");
                 return false;
             }*/
+
             if(list.length == 1){
                 var id = list[0].zjhm;
                 if(id == qlrId){
@@ -537,7 +553,7 @@ new Vue({
             // localStorage.setItem("keyIndex",keyIndex)
             $.ajax({
                 type:"GET",
-                url:"https://xysb.anthb.cn:1502/bdcydysq-server/api/aliAuth/zhima",
+                url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/aliAuth/zhima",
                 data:{
                     userName:list[count].qlrmc,
                     idCardNo:list[count].zjhm,
@@ -784,14 +800,14 @@ new Vue({
          * */
         dynamicTab(step){
             var self = this;
-            // self.qlrInfo.qlrmc ="黄金秋"
-            // self.qlrInfo.zjhm ="420606199311042014"
-            // self.qlrInfo.ybdcqzh = "鄂（2019）襄阳市不动产证明第0012222号"
-            // self.qlrInfo.dh = "13810244874"
-            // self.qlrInfo.dz = '湖北省襄阳市襄州区'
-            // self.qlrInfo.gyfs= 1
-            // self.qlrInfo.gyfs1= "共同共有"
-            // self.qlrInfo.sex = 1
+            self.qlrInfo.qlrmc ="张顺宝"
+            self.qlrInfo.zjhm ="42068319661125523X"
+            self.qlrInfo.ybdcqzh = "鄂（2019）襄阳市不动产权第0023309号"
+            self.qlrInfo.dh = "13810244874"
+            self.qlrInfo.dz = '湖北省襄阳市襄州区'
+            self.qlrInfo.gyfs= 1
+            self.qlrInfo.gyfs1= "共同共有"
+            self.qlrInfo.sex = 1
 
 
 
@@ -832,12 +848,12 @@ new Vue({
                 alert(111)
                 return true;
             }*/
-            if(self.qlrList.length != 0 ){
-                if(self.qlrList[self.addCount].isFace == 0 ){
-                    alert("请完成当前共有义务人扫脸验证")
-                    return;
-                }
-            }
+            // if(self.qlrList.length != 0 ){
+            //     if(self.qlrList[self.addCount].isFace == 0 ){
+            //         alert("请完成当前共有义务人扫脸验证")
+            //         return;
+            //     }
+            // }
             /*if(self.qlrList[self.addCount].isFace == 0 ){
                 alert("请完成当前共有权利人验证")
                 return;

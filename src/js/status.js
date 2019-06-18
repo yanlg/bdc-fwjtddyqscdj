@@ -36,7 +36,7 @@ new Vue({
             var self = this;
             $.ajax({
                 type:"GET",
-                url:"https://xysb.anthb.cn:1502/bdcydysq-server/api/bdcydj/queryDzzzInfo",
+                url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/fwjtddyqscdj/queryDzzzInfo",
                 data:{
                     zzh:self.getUrlParams("zzh")
                 },
