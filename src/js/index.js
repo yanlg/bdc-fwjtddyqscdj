@@ -393,9 +393,9 @@ new Vue({
             var self = this
 
             self.dydata.bdbzqse = 20;
-            self.dydata.zwlxqxs = "2019-06-10"
-            self.dydata.zwlxqxz = "2019-07-05"
-            self.dydata.dywmj = "94.87"
+            self.dydata.zwlxqxs = "2019-06-09"
+            self.dydata.zwlxqxz = "2019-06-28"
+            self.dydata.dywmj = "275.58"
             if(self.dydata.bdbzqse==''){
                 alert('被担保债券数额不能为空');
                 return ;
@@ -800,9 +800,9 @@ new Vue({
          * */
         dynamicTab(step){
             var self = this;
-            self.qlrInfo.qlrmc ="张顺宝"
-            self.qlrInfo.zjhm ="42068319661125523X"
-            self.qlrInfo.ybdcqzh = "鄂（2019）襄阳市不动产权第0023309号"
+            self.qlrInfo.qlrmc ="张仕兵"
+            self.qlrInfo.zjhm ="420621197312287755"
+            self.qlrInfo.ybdcqzh = "鄂（2019）襄阳市不动产权第0022421号"
             self.qlrInfo.dh = "13810244874"
             self.qlrInfo.dz = '湖北省襄阳市襄州区'
             self.qlrInfo.gyfs= 1
