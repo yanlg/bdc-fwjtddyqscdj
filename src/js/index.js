@@ -392,10 +392,10 @@ new Vue({
         postQlrxx(){
             var self = this
 
-            self.dydata.bdbzqse = 20;
-            self.dydata.zwlxqxs = "2019-06-09"
-            self.dydata.zwlxqxz = "2019-06-28"
-            self.dydata.dywmj = "275.58"
+            // self.dydata.bdbzqse = 20;
+            // self.dydata.zwlxqxs = "2019-06-09"
+            // self.dydata.zwlxqxz = "2019-07-03"
+            // self.dydata.dywmj = "102.03"
             if(self.dydata.bdbzqse==''){
                 alert('被担保债券数额不能为空');
                 return ;
@@ -418,6 +418,7 @@ new Vue({
             self.loading = true
             debugger
             self.qlrInfo.slid = self.qlrxx.SLID
+            self.dydata.dyfs = self.bdcxx.dyfs
             // var hth =
             $.ajax({
                 type:"POST",
@@ -454,6 +455,8 @@ new Vue({
                     }
                 },
                 error:function (jqXHR,textStatus,err) {
+                    self.loading = false
+                    alert("错误信息："+err);
                     console.log(err)
                 }
             })
@@ -472,12 +475,12 @@ new Vue({
             var qlrId = self .qlrInfo.zjhm
 
 
-            list[count].gyfs1 = 1;
-            list[count].sex  = "男"
-            list[count].qlrmc="黄明清"
-            list[count].zjhm ="420683196509080947"
-            list[count].dh = "13810234984"
-            list[count].dz ="湖北省襄阳市"
+            // list[count].gyfs1 = 1;
+            // list[count].sex  = "男"
+            // list[count].qlrmc="黄明清"
+            // list[count].zjhm ="420683196509080947"
+            // list[count].dh = "13810234984"
+            // list[count].dz ="湖北省襄阳市"
 
             console.log(count)
             if(list[count].qlrmc == ''){
@@ -800,14 +803,14 @@ new Vue({
          * */
         dynamicTab(step){
             var self = this;
-            self.qlrInfo.qlrmc ="张仕兵"
-            self.qlrInfo.zjhm ="420621197312287755"
-            self.qlrInfo.ybdcqzh = "鄂（2019）襄阳市不动产权第0022421号"
-            self.qlrInfo.dh = "13810244874"
-            self.qlrInfo.dz = '湖北省襄阳市襄州区'
-            self.qlrInfo.gyfs= 1
-            self.qlrInfo.gyfs1= "共同共有"
-            self.qlrInfo.sex = 1
+            // self.qlrInfo.qlrmc ="陈茜"
+            // self.qlrInfo.zjhm ="420626199001142525"
+            // self.qlrInfo.ybdcqzh = "鄂（2019）襄阳市不动产权第0021850号"
+            // self.qlrInfo.dh = "1381024"
+            // self.qlrInfo.dz = '湖北省襄阳市襄州区'
+            // self.qlrInfo.gyfs=1
+            // self.qlrInfo.gyfs1= "共同共有"
+            // self.qlrInfo.sex = 1
 
 
 
@@ -848,12 +851,12 @@ new Vue({
                 alert(111)
                 return true;
             }*/
-            // if(self.qlrList.length != 0 ){
-            //     if(self.qlrList[self.addCount].isFace == 0 ){
-            //         alert("请完成当前共有义务人扫脸验证")
-            //         return;
-            //     }
-            // }
+            if(self.qlrList.length != 0 ){
+                if(self.qlrList[self.addCount].isFace == 0 ){
+                    alert("请完成当前共有义务人扫脸验证")
+                    return;
+                }
+            }
             /*if(self.qlrList[self.addCount].isFace == 0 ){
                 alert("请完成当前共有权利人验证")
                 return;
