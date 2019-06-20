@@ -176,7 +176,7 @@ new Vue({
                         // alert("开启扫脸")
                         self.alipayFace()
                     }else{
-                        alert("暂未查询到当前权利人预登记信息")
+                        alert("暂未查询到当前权利人预登记信息~")
                     }
                 },
                 error:function (jqXHR,textStatus,err) {
