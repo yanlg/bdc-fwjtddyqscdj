@@ -422,8 +422,8 @@ new Vue({
             // var hth =
             $.ajax({
                 type:"POST",
-                // url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/fwjtddyqscdj/apply/submit",
-                url:"http://localhost:8082/fwjtddyqscdj-server/api/fwjtddyqscdj/apply/submit",
+                url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/fwjtddyqscdj/apply/submit",
+                // url:"http://localhost:8082/fwjtddyqscdj-server/api/fwjtddyqscdj/apply/submit",
                 data:JSON.stringify({
                     applyInfo: {			// 申请人信息
                         sqrXm:self.userName,			// 申请人姓名
