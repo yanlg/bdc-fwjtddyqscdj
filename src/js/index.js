@@ -279,8 +279,8 @@ new Vue({
             self.loading = true
             $.ajax({
                 type:"GET",
-                url:"http://localhost:8082/fwjtddyqscdj-server/api/fwjtddyqscdj/queryInfo",
-                // url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/fwjtddyqscdj/queryInfo",
+                // url:"http://localhost:8082/fwjtddyqscdj-server/api/fwjtddyqscdj/queryInfo",
+                url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/fwjtddyqscdj/queryInfo",
                 data:{
                     qlrmc:self.qlrInfo.qlrmc,
                     qlrzjbh:self.qlrInfo.zjhm,
