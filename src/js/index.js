@@ -277,9 +277,9 @@ new Vue({
             // var userName = localStorage.getItem("userName")
             // var certNo = localStorage.getItem("certNo")
             self.loading = true
+            debugger
             $.ajax({
                 type:"GET",
-                // url:"http://localhost:8082/fwjtddyqscdj-server/api/fwjtddyqscdj/queryInfo",
                 url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/fwjtddyqscdj/queryInfo",
                 data:{
                     qlrmc:self.qlrInfo.qlrmc,
@@ -423,7 +423,6 @@ new Vue({
             $.ajax({
                 type:"POST",
                 url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/fwjtddyqscdj/apply/submit",
-                // url:"http://localhost:8082/fwjtddyqscdj-server/api/fwjtddyqscdj/apply/submit",
                 data:JSON.stringify({
                     applyInfo: {			// 申请人信息
                         sqrXm:self.userName,			// 申请人姓名
@@ -803,14 +802,14 @@ new Vue({
          * */
         dynamicTab(step){
             var self = this;
-            // self.qlrInfo.qlrmc ="陈茜"
-            // self.qlrInfo.zjhm ="420626199001142525"
-            // self.qlrInfo.ybdcqzh = "鄂（2019）襄阳市不动产权第0021850号"
-            // self.qlrInfo.dh = "1381024"
-            // self.qlrInfo.dz = '湖北省襄阳市襄州区'
-            // self.qlrInfo.gyfs=1
-            // self.qlrInfo.gyfs1= "共同共有"
-            // self.qlrInfo.sex = 1
+            self.qlrInfo.qlrmc ="陈茜"
+            self.qlrInfo.zjhm ="420626199001142525"
+            self.qlrInfo.ybdcqzh = "鄂（2019）襄阳市不动产权第0021850号"
+            self.qlrInfo.dh = "1381024"
+            self.qlrInfo.dz = '湖北省襄阳市襄州区'
+            self.qlrInfo.gyfs=1
+            self.qlrInfo.gyfs1= "共同共有"
+            self.qlrInfo.sex = 1
 
 
 
