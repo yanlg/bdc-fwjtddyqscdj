@@ -802,14 +802,14 @@ new Vue({
          * */
         dynamicTab(step){
             var self = this;
-            self.qlrInfo.qlrmc ="陈茜"
-            self.qlrInfo.zjhm ="420626199001142525"
-            self.qlrInfo.ybdcqzh = "鄂（2019）襄阳市不动产权第0021850号"
-            self.qlrInfo.dh = "1381024"
-            self.qlrInfo.dz = '湖北省襄阳市襄州区'
-            self.qlrInfo.gyfs=1
-            self.qlrInfo.gyfs1= "共同共有"
-            self.qlrInfo.sex = 1
+            // self.qlrInfo.qlrmc ="陈茜"
+            // self.qlrInfo.zjhm ="420626199001142525"
+            // self.qlrInfo.ybdcqzh = "鄂（2019）襄阳市不动产权第0021850号"
+            // self.qlrInfo.dh = "1381024"
+            // self.qlrInfo.dz = '湖北省襄阳市襄州区'
+            // self.qlrInfo.gyfs=1
+            // self.qlrInfo.gyfs1= "共同共有"
+            // self.qlrInfo.sex = 1
 
 
 
