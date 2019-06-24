@@ -270,7 +270,7 @@ new Vue({
         },
         /***
          * 查询义务人和不动产信息
-         * https://xysb.anthb.cn:1502/bdcydysq-server/api/bdcydj/queryInfo
+         * https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/fwjtddyqscdj/queryInfo
          * */
         getObliGator(step){
             var self = this
