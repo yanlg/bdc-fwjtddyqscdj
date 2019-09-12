@@ -175,6 +175,7 @@ new Vue({
                     if(res.code == 0){
                         // alert("开启扫脸")
                         self.alipayFace()
+                        localStorage.setItem("szqxdm",res.szqxdm);
                     }else{
                         alert(res.msg)
                     }

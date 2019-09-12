@@ -20,6 +20,7 @@ new Vue({
         // 熊赟芃	420606199306021016
         userName:localStorage.getItem("userName") ,
         idCard:localStorage.getItem("certNo"),
+        szqxdm:localStorage.getItem("szqxdm"),
 		tabFlag:0,
         loading:false,//是否显示加载状态
         showUserInfo:false,
@@ -277,16 +278,15 @@ new Vue({
             // var userName = localStorage.getItem("userName")
             // var certNo = localStorage.getItem("certNo")
             self.loading = true
-            debugger
+            // self.szqxdm = '420683'
             $.ajax({
                 type:"GET",
                 url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/fwjtddyqscdj/queryInfo",
+                // url:"http://localhost:8082/api/fwjtddyqscdj/queryInfo",
                 data:{
-                    qlrmc:self.qlrInfo.qlrmc,
-                    qlrzjbh:self.qlrInfo.zjhm,
+
                     ybdcqzh:self.qlrInfo.ybdcqzh,
-                    // qlrmc:"赵文文",
-                    // qlrzjbh:"420684198309043012"
+                    szqxdm:self.szqxdm
 
                 },
                 contentType : "application/json",
@@ -299,9 +299,9 @@ new Vue({
                         // alert(res.msg)
                         self.zl = res.data.zl
                         self.bdcxx = res.data.bdcdata
+                        self.bdcxx.szqxdm = self.szqxdm
                         self.qlrxx = res.data.qlrdata[0]
                         self.loading = false
-                        // self.getHtInfo(res.data.ywrData.JYBAHTH)
                         self.isSubmit = step
                         self.tabFlag = step
                         setTimeout(function () {
@@ -422,7 +422,8 @@ new Vue({
             // var hth =
             $.ajax({
                 type:"POST",
-                url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/fwjtddyqscdj/apply/submit",
+                // url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/fwjtddyqscdj/apply/submit",
+                url:"http://localhost:8082/api/fwjtddyqscdj/apply/submit",
                 data:JSON.stringify({
                     applyInfo: {			// 申请人信息
                         sqrXm:self.userName,			// 申请人姓名
@@ -443,15 +444,13 @@ new Vue({
                 dataType : "json",
                 success:function (res) {
                     if(res.code == 1){
-                        // alert(res.msg)
-                        self.loading = false
                         localStorage.clear()
-                        window.location.href = "./status.html?zzh="+res.data
+                        // window.location.href = "./status.html?zzh="+res.data
+                        window.location.href = "./status.html"
                     }else{
-                        // console.log("暂无合同信息")
                         alert(res.msg)
-                        self.loading = false
                     }
+                    self.loading = false
                 },
                 error:function (jqXHR,textStatus,err) {
                     self.loading = false
@@ -802,9 +801,9 @@ new Vue({
          * */
         dynamicTab(step){
             var self = this;
-            // self.qlrInfo.qlrmc ="陈茜"
-            // self.qlrInfo.zjhm ="420626199001142525"
-            // self.qlrInfo.ybdcqzh = "鄂（2019）襄阳市不动产权第0021850号"
+            // self.qlrInfo.qlrmc ="颜梅芳"
+            // self.qlrInfo.zjhm ="42062119730630386X"
+            // self.qlrInfo.ybdcqzh = "鄂（2019）襄阳市不动产权第0012639号"
             // self.qlrInfo.dh = "1381024"
             // self.qlrInfo.dz = '湖北省襄阳市襄州区'
             // self.qlrInfo.gyfs=1
@@ -838,7 +837,7 @@ new Vue({
                 alert("请输入义务人地址")
                 return;
             }
-            if(self.qlrInfo.gyfs1 == ''){
+            if(self.qlrInfo.gyfs1 == '' || self.qlrInfo.gyfs == ''){
                 alert("请选择义务人共有方式")
                 return;
             }
@@ -870,7 +869,8 @@ new Vue({
             var nowMonth = now.getMonth() + 1;
             var nowDate = now.getDate();
             var yearData = function(callback) {
-                // settimeout只是模拟异步请求，真实情况可以去掉
+                // setti
+                // meout只是模拟异步请求，真实情况可以去掉
                 // setTimeout(function() {
                 callback(self.formatYear(nowYear))
                 // }, 2000)
