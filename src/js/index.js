@@ -443,6 +443,7 @@ new Vue({
                 },
                 dataType : "json",
                 success:function (res) {
+                    self.loading = false
                     if(res.code == 1){
                         localStorage.clear()
                         // window.location.href = "./status.html?zzh="+res.data
@@ -450,7 +451,7 @@ new Vue({
                     }else{
                         alert(res.msg)
                     }
-                    self.loading = false
+
                 },
                 error:function (jqXHR,textStatus,err) {
                     self.loading = false
