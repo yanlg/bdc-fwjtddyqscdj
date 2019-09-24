@@ -15,17 +15,19 @@ new Vue({
     el: "#app",
 
     data: {
-        // 王忠贤、廖华敏	420600197610183012、420606197405228523
-        //黄兴权	420619196909098192
-        // 熊赟芃	420606199306021016
+        // userName:'赵运涛',
+        // idCard:'420621198403012778',
         userName:localStorage.getItem("userName") ,
         idCard:localStorage.getItem("certNo"),
         szqxdm:localStorage.getItem("szqxdm"),
+        // szqxdm:'420600',
 		tabFlag:0,
         loading:false,//是否显示加载状态
         showUserInfo:false,
         isAgree:true,
         addCount:0,//判断用户点击添加共有人的次数
+        year:"",
+        zhenghao:"",
         //权利人信息
         qlrInfo: {				// 权利人信息
             qlrmc:localStorage.getItem("userName") || "",			// 权利人名称
@@ -43,18 +45,7 @@ new Vue({
         //共有权利人信息
         qlrList:[				// 共有权利人列表(参数说明同上)
 
-            // {
-            //     qlrmc: "",
-            //     xb: "",
-            //     zjhm: "",
-            //     dh: "",
-            //     gyfs: "",
-            //     gyfs1: "",			// 转译后的汉字
-            //     dz: "",
-            //     sex:'',
-            //     isFace:0,//0代表未扫脸1代表已扫脸通过（此字段为前端增加便于处理交互）
-            //     isReadOnly:false//是否只读，已扫脸成功则设置成只读（此字段为前端增加便于处理交互）
-            // },
+
         ],
         //义务人
         qlrxx:{
@@ -65,6 +56,7 @@ new Vue({
         //合同信息
         htxx:{},
         isSubmit:0,//是否输入完成标识
+
         isFastClick:false,
         valueReadonly: '请选择出生日期',
         dydata:{
@@ -133,13 +125,10 @@ new Vue({
         }
     },
     created: function () {
-        // eruda.init()
-        //隐藏右上角菜单栏
-        // AlipayJSBridge.call('hideOptionMenu');
+
     },
     mounted: function (){
-        // this.checkFaceResult();
-        // console.log(localStorage.getItem("xxx"))
+
         var self = this
         var faceIndex = self.getUrlParams("faceIndex")
         // alert(faceIndex)
@@ -149,20 +138,115 @@ new Vue({
                 // self.getHtInfo()
             }else{
                 self.secondOpenPage()
-                // self.getObliGator()
-                // self.getHtInfo()
+
             }
     },
     methods: {
+        checkPhone(phone){
+            if((/^1[3456789]\d{9}$/.test(phone))){
+                return true;
+            }
+            return false;
+        },
+        tanseSex(sex){
+            if(sex == "1"){
+                return "男"
+            }else if(sex == "2"){
+                return "女"
+            }else{
+                return "不详"
+            }
+
+        },
+        tansGyfs(gyfs){
+            if(gyfs == "0"){
+                return "单独所有"
+            }else if(gyfs == "1"){
+                return "共同共有"
+            }else if(gyfs == "2"){
+                return "按份共有"
+            }else if(gyfs == "3"){
+                return "其它共有"
+            }else{
+                return "单独所有"
+            }
+        },
         changeTab(item){
-			var self= this
-			/*if(item == self.tabFlag){
-				return;
-			}else {
-                self.tabFlag = item
-			}*/
-			if(item == self.dataFlag) return;
-			else self.tabFlag = item;
+            var self= this
+
+            if(item == 1){
+                if(self.qlrInfo.ybdcqzh == ""){
+                    alert('请输入预告登记证明号')
+                    return false
+                }
+
+                if(self.qlrInfo.qlrmc == ''){
+                    alert('请输入义务人姓名')
+                    return false;
+                }
+                if(self.qlrInfo.zjhm == ''){
+                    alert('请输入义务人身份证号码')
+                    return false;
+                }
+
+                if(!self.idcard(self.qlrInfo.zjhm).isTrue){
+                    alert('义务人身份证号码不合法')
+                    return false;
+                }
+                if(self.qlrInfo.sex == undefined || self.qlrInfo.sex == ''){
+                    alert('请选择义务人性别')
+                    return false;
+                }
+                if(self.qlrInfo.dh == undefined || self.qlrInfo.dh == ''){
+                    alert('请输入义务人联系方式')
+                    return false;
+                }
+                if(!self.checkPhone(self.qlrInfo.dh)){
+                    alert('请输入正确的手机号码')
+                    return false
+
+                }
+                if(self.qlrInfo.dz == undefined || self.qlrInfo.dz == ''){
+                    alert("请输入义务人地址")
+                }
+                if(self.qlrInfo.gyfs1 == undefined || self.qlrInfo.gyfs1 == ''){
+                    alert("请选择义务人共有方式")
+                    return false;
+                }
+
+                var list = self.qlrList
+                var count = self.addCount
+
+                if(list[count] != undefined){
+                    if(list[count].qlrmc == undefined || list[count].zjhm == undefined || list[count].dh == undefined  || list[count].gyfs1 == undefined ||
+                        list[count].sex == undefined  || list[count].dz == undefined ||
+                        list[count].qlrmc == "" || list[count].zjhm == "" || list[count].dh == ""  || list[count].gyfs1 == "" ||
+                        list[count].sex == ""  || list[count].dz == "" ){
+                        alert('请完成当前共有权利人信息填写')
+                        return false;
+                    }
+                    if(!self.checkPhone(list[count].dh)){
+                        alert('请输入正确的手机号码')
+                        return false
+                    }
+                    if(list[count].isFace == 0){
+
+                        alert('请完成当前共有权利人扫脸认证')
+                        return false;
+                    }
+
+                }
+
+
+
+                if(item == self.dataFlag) return;
+                else self.tabFlag = item;
+
+            }else{
+                if(item == self.dataFlag) return;
+                else self.tabFlag = item;
+            }
+            self.isSubmit = item
         },
         /**首次添加共有人*/
         showAddContain(){
@@ -275,19 +359,25 @@ new Vue({
          * */
         getObliGator(step){
             var self = this
-            // var userName = localStorage.getItem("userName")
-            // var certNo = localStorage.getItem("certNo")
+            if( self.qlrInfo.ybdcqzh ==""){
+                alert('请输入原不动产权证号')
+                return false
+            }
+
+
+            console.log("组装的证明号为："+ self.qlrInfo.ybdcqzh)
+
             self.loading = true
-            // self.szqxdm = '420683'
+
             $.ajax({
                 type:"GET",
                 url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/fwjtddyqscdj/queryInfo",
-                // url:"http://localhost:8082/api/fwjtddyqscdj/queryInfo",
+                // url:"http://localhost:8085/fwjtddyqscdj-server/api/fwjtddyqscdj/queryInfo",
                 data:{
 
                     ybdcqzh:self.qlrInfo.ybdcqzh,
                     szqxdm:self.szqxdm
-
+                    // szqxdm:'420600'
                 },
                 contentType : "application/json",
                 headers: {
@@ -300,10 +390,51 @@ new Vue({
                         self.zl = res.data.zl
                         self.bdcxx = res.data.bdcdata
                         self.bdcxx.szqxdm = self.szqxdm
-                        self.qlrxx = res.data.qlrdata[0]
                         self.loading = false
-                        self.isSubmit = step
-                        self.tabFlag = step
+
+                        var j = 0;
+                        var list = res.data.qlrdata
+                        for(var i=0;i<list.length;i++){
+                            //权利人
+                            if(list[i]['BZ'] == "0"){
+                                self.qlrxx.QLRMC = list[i].QLRMC;
+                                self.qlrxx.ZJZL = list[i].ZJZL
+                                self.qlrxx.ZJHM = list[i].ZJHM
+                                self.qlrxx.DH = list[i].DH
+                                self.qlrxx.QLRYZBM = list[i].QLRYZBM
+                                self.qlrxx.DZ = list[i].DZ
+                            }else{
+                                //义务人
+                                if(list[i]['ZJHM'] == self.idCard){
+                                    debugger
+                                    self.qlrInfo.qlrmc = list[i].QLRMC
+                                    self.qlrInfo.zjhm = list[i].ZJHM
+                                    self.qlrInfo.sex = self.tanseSex(list[i].XB)
+                                    self.qlrInfo.gyfs1 = self.tansGyfs(list[i].GYFS)
+                                    self.qlrInfo.gyfs = list[i].GYFS
+                                    self.qlrInfo.dh = list[i].DH
+                                    self.qlrInfo.dz = list[i].DZ
+                                    // self.qlrInfo.ybdcqzh = self.qlrInfo.ybdcqzh
+                                }else{
+
+                                    self.showAddContain();
+                                    self.qlrList[j].qlrmc = list[i].QLRMC
+                                    self.qlrList[j].zjhm = list[i].ZJHM
+                                    self.qlrList[j].sex = self.tanseSex(list[i].XB)
+                                    self.qlrList[j].gyfs1 = self.tansGyfs(list[i].GYFS)
+                                    self.qlrList[j].gyfs = list[i].GYFS
+                                    self.qlrList[j].dh = list[i].DH
+                                    self.qlrList[j].dz = list[i].DZ
+                                    self.qlrList[j].ybdcqzh = self.qlrInfo.ybdcqzh
+
+                                    console.log("查询赋值list"+self.qlrList)
+                                    self.addCount = j
+
+                                    j++;
+                                }
+                            }
+
+                        }
                         setTimeout(function () {
                             self.isFastClick = false;
                         },2000)
@@ -392,10 +523,10 @@ new Vue({
         postQlrxx(){
             var self = this
 
-            // self.dydata.bdbzqse = 20;
-            // self.dydata.zwlxqxs = "2019-06-09"
-            // self.dydata.zwlxqxz = "2019-07-03"
-            // self.dydata.dywmj = "102.03"
+            // self.dydata.bdbzqse = 66;
+            // self.dydata.zwlxqxs = "2019-07-11"
+            // self.dydata.zwlxqxz = "2019-07-11"
+            // self.dydata.dywmj = "137.48"
             if(self.dydata.bdbzqse==''){
                 alert('被担保债券数额不能为空');
                 return ;
@@ -423,13 +554,12 @@ new Vue({
             $.ajax({
                 type:"POST",
                 url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/fwjtddyqscdj/apply/submit",
-                // url:"http://localhost:8082/api/fwjtddyqscdj/apply/submit",
+                // url:"http://localhost:8085/fwjtddyqscdj-server/api/fwjtddyqscdj/apply/submit",
                 data:JSON.stringify({
                     applyInfo: {			// 申请人信息
                         sqrXm:self.userName,			// 申请人姓名
                         sqrSfzhm:self.idCard	// 申请人身份证号
-                        // sqrXm:"徐兰",			// 申请人姓名
-                        // sqrSfzhm:"420621199011051502"	// 申请人身份证号
+
                     },
                     qlrInfo:self.qlrInfo,
                     qlrList:self.qlrList,
@@ -446,7 +576,6 @@ new Vue({
                     self.loading = false
                     if(res.code == 1){
                         localStorage.clear()
-                        // window.location.href = "./status.html?zzh="+res.data
                         window.location.href = "./status.html"
                     }else{
                         alert(res.msg)
