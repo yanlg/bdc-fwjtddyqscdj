@@ -182,13 +182,14 @@ new Vue({
         },
         changeTab(item){
             var self= this
-            if(!self.isSearch ){
+            debugger
+            if(JSON.stringify(self.bdcxx) == "{}"){
 
                 alert('请输入不动产权证号【点击 查询 按钮进行查询】！！！')
                 return false
             }
             if(item == 1){
-                if(self.qlrInfo.ybdcqzh == ""){
+                if(self.qlrInfo.ybdcqzh == "" ){
                     alert('请输入不动产权证号进行查询')
                     return false
                 }
@@ -715,7 +716,7 @@ new Vue({
                     self.loading = true;
                     window.location.href = res.redirectInvokeUrl
 
-                    self.isSearch = true
+
                 },
                 error:function (jqXHR,textStatus,err) {
                     console.log(err)
