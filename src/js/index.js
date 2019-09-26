@@ -819,7 +819,7 @@ new Vue({
                     }, function(result) {
                         var sex = result;
                         self.qlrInfo.sex = result.selectedOneOption;
-                        switch(sex){
+                        switch( self.qlrInfo.sex){
                             case "男":
                                 self.qlrInfo.xb = "1";
                                 break;
@@ -844,7 +844,7 @@ new Vue({
                     }, function(result) {
                         var sex = result;
                         self.qlrList[index].sex = result.selectedOneOption;
-                        switch(sex){
+                        switch(self.qlrList[index].sex){
                             case "男":
                                 self.qlrList[index].xb = "1";
                                 break;
@@ -876,7 +876,7 @@ new Vue({
                     }, function(result) {
                         var sex = result;
                         self.qlrInfo.gyfs1 = result.selectedOneOption;
-                        switch(sex){
+                        switch(self.qlrInfo.gyfs1){
                             case "单独所有":
                                 self.qlrInfo.gyfs = "0";
                                 break;
@@ -903,7 +903,7 @@ new Vue({
                     }, function(result) {
                         var sex = result;
                         self.qlrList[index].gyfs1 = result.selectedOneOption;
-                        switch(sex){
+                        switch(  self.qlrList[index].gyfs1){
                             case "单独所有":
                                 self.qlrList[index].gyfs = "0";
                                 break;
