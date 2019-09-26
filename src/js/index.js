@@ -182,13 +182,8 @@ new Vue({
         },
         changeTab(item){
             var self= this
-            debugger
+            console.log("下一步的时候获取刷脸后的数据"+res.qlrInfo)
 
-            if(!self.isSearch ){
-
-                alert('请输入不动产权证号【点击 查询 按钮进行查询】！！！')
-                return false
-            }
             if(item == 1){
                 if(self.qlrInfo.ybdcqzh == "" ){
                     alert('请输入不动产权证号进行查询')
@@ -246,11 +241,71 @@ new Vue({
                     }
                     if(list[count].isFace == 0){
 
-                        // alert('请完成当前共有权利人扫脸认证')
-                        // return false;
+                        alert('请完成当前共有权利人扫脸认证')
+                        return false;
                     }
 
                 }
+
+
+
+
+
+                self.loading = true
+                $.ajax({
+                    type:"GET",
+                    url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/fwjtddyqscdj/queryInfo",
+                    // url:"http://localhost:8085/fwjtddyqscdj-server/api/fwjtddyqscdj/queryInfo",
+                    data:{
+
+                        ybdcqzh:self.qlrInfo.ybdcqzh,
+                        szqxdm:self.szqxdm
+                        // szqxdm:'420600'
+                    },
+                    contentType : "application/json",
+                    headers: {
+                        // Authorization: "Bearer "+localStorage.getItem('zyyy_id_token')
+                    },
+                    dataType : "json",
+                    success:function (res) {
+                        localStorage.setItem("isSearch",true)
+                        if(res.code == 1){
+                            // alert(res.msg)
+                            self.zl = res.data.zl
+                            self.bdcxx = res.data.bdcdata
+                            console.log(self.bdcxx)
+                            self.bdcxx.szqxdm = self.szqxdm
+                            self.loading = false
+
+                            var list = res.data.qlrdata
+                            for(var i=0;i<list.length;i++){
+                                //权利人
+                                if(list[i]['BZ'] == "0"){
+                                    self.qlrxx.QLRMC = list[i].QLRMC;
+                                    self.qlrxx.ZJZL = list[i].ZJZL
+                                    self.qlrxx.ZJHM = list[i].ZJHM
+                                    self.qlrxx.DH = list[i].DH
+                                    self.qlrxx.QLRYZBM = list[i].QLRYZBM
+                                    self.qlrxx.DZ = list[i].DZ
+                                }
+                            }
+                            setTimeout(function () {
+                                self.isFastClick = false;
+                            },2000)
+                        }
+                        else if(res.code == -1){
+                            self.loading = false
+                            alert(res.msg)
+                            setTimeout(function () {
+                                self.isFastClick = false;
+                            },2000)
+                            return false;
+                        }
+                    },
+                    error:function (jqXHR,textStatus,err) {
+                        console.log(err)
+                    }
+                })
 
 
 
@@ -400,7 +455,7 @@ new Vue({
                 },
                 dataType : "json",
                 success:function (res) {
-                    self.isSearch = true
+                    localStorage.setItem("isSearch",true)
                     if(res.code == 1){
                         // alert(res.msg)
                         self.zl = res.data.zl
@@ -717,6 +772,7 @@ new Vue({
                     self.loading = true;
                     window.location.href = res.redirectInvokeUrl
 
+                    console.log("刷脸后的数据"+res.qlrInfo)
 
                 },
                 error:function (jqXHR,textStatus,err) {
