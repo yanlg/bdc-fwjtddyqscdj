@@ -250,9 +250,7 @@ new Vue({
 
 
 
-                if( self.qlrInfo.gyfs == "" ||  self.qlrInfo.gyfs == null){
-                    return false
-                }
+
 
                 self.loading = true
                 $.ajax({
@@ -438,7 +436,10 @@ new Vue({
             }
 
 
-            console.log("组装的证明号为："+ self.qlrInfo.ybdcqzh)
+            if( self.qlrInfo.gyfs == "" ||  self.qlrInfo.gyfs == null){
+               alert("您已成功查询权利人信息，请勿重复点击")
+                return false
+            }
 
             self.loading = true
 
