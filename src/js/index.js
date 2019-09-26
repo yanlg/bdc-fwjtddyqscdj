@@ -184,6 +184,7 @@ new Vue({
             var self= this
             if(!self.isSearch ){
                 alert("请输入不动产权证号进行查询！")
+                return false
             }
             if(item == 1){
                 if(self.qlrInfo.ybdcqzh == ""){
