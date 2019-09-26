@@ -21,9 +21,14 @@ new Vue({
     data: {
         // userName:'赵运涛',
         // idCard:'420621198403012778',
-        userName:localStorage.getItem("userName") ,
-        idCard:localStorage.getItem("certNo"),
-        szqxdm:localStorage.getItem("szqxdm"),
+        // userName:localStorage.getItem("userName") ,
+        // idCard:localStorage.getItem("certNo"),
+        // szqxdm:localStorage.getItem("szqxdm"),
+
+
+        userName:"雷鹏" ,
+        idCard:"420621198812171147",
+        szqxdm:'420600',
         // szqxdm:'420600',
 		tabFlag:0,
         loading:false,//是否显示加载状态
@@ -43,7 +48,7 @@ new Vue({
             dz: "",
             sex:'',// 通讯地址
             qlrInfo:"",
-            ybdcqzh:""
+            ybdcqzh:"鄂（2019）襄阳市不动产权第0059020号"
             // isReadOnly:false
         },
         //共有权利人信息
@@ -235,8 +240,8 @@ new Vue({
                     }
                     if(list[count].isFace == 0){
 
-                        alert('请完成当前共有权利人扫脸认证')
-                        return false;
+                        // alert('请完成当前共有权利人扫脸认证')
+                        // return false;
                     }
 
                 }
@@ -393,6 +398,7 @@ new Vue({
                         // alert(res.msg)
                         self.zl = res.data.zl
                         self.bdcxx = res.data.bdcdata
+                        console.log(self.bdcxx)
                         self.bdcxx.szqxdm = self.szqxdm
                         self.loading = false
 
@@ -409,7 +415,8 @@ new Vue({
                                 self.qlrxx.DZ = list[i].DZ
                             }else{
                                 //义务人
-                                if(list[i]['ZJHM'] == self.idCard){
+                                // if(list[i]['ZJHM'] == self.idCard   ){
+                                if(list[i]['ZJHM'] == self.idCard   ){
                                     debugger
                                     self.qlrInfo.qlrmc = list[i].QLRMC
                                     self.qlrInfo.zjhm = list[i].ZJHM
