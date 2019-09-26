@@ -29,6 +29,7 @@ new Vue({
         // userName:"付霞" ,
         // idCard:"42060119621215068X",
         // szqxdm:'420600',
+        isSearch:false,
 		tabFlag:0,
         loading:false,//是否显示加载状态
         showUserInfo:false,
@@ -181,7 +182,9 @@ new Vue({
         },
         changeTab(item){
             var self= this
-
+            if(!self.isSearch ){
+                alert("请输入不动产权证号进行查询！")
+            }
             if(item == 1){
                 if(self.qlrInfo.ybdcqzh == ""){
                     alert('请输入不动产权证号进行查询')
@@ -393,6 +396,7 @@ new Vue({
                 },
                 dataType : "json",
                 success:function (res) {
+                    self.isSearch = true
                     if(res.code == 1){
                         // alert(res.msg)
                         self.zl = res.data.zl
