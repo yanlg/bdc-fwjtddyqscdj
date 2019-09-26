@@ -456,6 +456,8 @@ new Vue({
                 dataType : "json",
                 success:function (res) {
                     localStorage.setItem("isSearch",true)
+
+                    self.qlrInfo = {};
                     if(res.code == 1){
                         // alert(res.msg)
                         self.zl = res.data.zl
