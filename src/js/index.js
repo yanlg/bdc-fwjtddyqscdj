@@ -36,6 +36,7 @@ new Vue({
         isAgree:true,
         addCount:0,//判断用户点击添加共有人的次数
         year:"",
+        isAearch:false,
         zhenghao:"",
         //权利人信息
         qlrInfo: {				// 权利人信息
@@ -249,7 +250,9 @@ new Vue({
 
 
 
-
+                if( self.qlrInfo.gyfs == "" ||  self.qlrInfo.gyfs == null){
+                    return false
+                }
 
                 self.loading = true
                 $.ajax({
@@ -268,7 +271,7 @@ new Vue({
                     },
                     dataType : "json",
                     success:function (res) {
-                        localStorage.setItem("isSearch",true)
+
                         if(res.code == 1){
                             // alert(res.msg)
                             self.zl = res.data.zl
@@ -457,7 +460,7 @@ new Vue({
                 success:function (res) {
                     localStorage.setItem("isSearch",true)
 
-                    self.qlrInfo = {};
+                  self.isea
                     if(res.code == 1){
                         // alert(res.msg)
                         self.zl = res.data.zl
