@@ -182,7 +182,7 @@ new Vue({
         },
         changeTab(item){
             var self= this
-            console.log("下一步的时候获取刷脸后的数据"+res.qlrInfo)
+            console.log("下一步的时候获取刷脸后的数据"+self.qlrInfo)
 
             if(item == 1){
                 if(self.qlrInfo.ybdcqzh == "" ){
