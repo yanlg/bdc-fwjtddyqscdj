@@ -435,8 +435,10 @@ new Vue({
                 return false
             }
 
+debugger
+            console.log(self.qlrInfo.gyfs)
 
-            if( self.qlrInfo.gyfs == "" ||  self.qlrInfo.gyfs == null){
+            if( !(self.qlrInfo.gyfs == "" ||  self.qlrInfo.gyfs == null)){
                alert("您已成功查询权利人信息，请勿重复点击")
                 return false
             }
