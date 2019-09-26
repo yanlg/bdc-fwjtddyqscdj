@@ -21,14 +21,13 @@ new Vue({
     data: {
         // userName:'赵运涛',
         // idCard:'420621198403012778',
-        // userName:localStorage.getItem("userName") ,
-        // idCard:localStorage.getItem("certNo"),
-        // szqxdm:localStorage.getItem("szqxdm"),
+        userName:localStorage.getItem("userName") ,
+        idCard:localStorage.getItem("certNo"),
+        szqxdm:localStorage.getItem("szqxdm"),
 
 
-        userName:"付霞" ,
-        idCard:"42060119621215068X",
-        szqxdm:'420600',
+        // userName:"付霞" ,
+        // idCard:"42060119621215068X",
         // szqxdm:'420600',
 		tabFlag:0,
         loading:false,//是否显示加载状态
@@ -48,7 +47,7 @@ new Vue({
             dz: "",
             sex:'',// 通讯地址
             qlrInfo:"",
-            ybdcqzh:"鄂（2018）襄阳市不动产权第0060820号"
+            ybdcqzh:""
             // isReadOnly:false
         },
         //共有权利人信息
@@ -240,8 +239,8 @@ new Vue({
                     }
                     if(list[count].isFace == 0){
 
-                        // alert('请完成当前共有权利人扫脸认证')
-                        // return false;
+                        alert('请完成当前共有权利人扫脸认证')
+                        return false;
                     }
 
                 }

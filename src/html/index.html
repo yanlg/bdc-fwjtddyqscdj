@@ -110,7 +110,7 @@
 				<div class="bdc-form-input">
 					<p @click="chooseGyfs('0',0)">
 						<label for="">共有方式</label>
-						<input type="text" placeholder="请选择共有方式" readonly="readonly" v-model="qlrInfo.gyfs1">
+						<input type="text" placeholder="请选择共有方式" readonly="readonly" v-model="qlrInfo.gyfs1" unselectable="on" onfocus="this.blur()" readonly="readonly">
 					</p>
 				</div>
 				<div class="bdc-form-input">
@@ -159,13 +159,13 @@
 						<div class="bdc-form-input">
 							<p @click="chooseGyfs('1',index)">
 								<label for="">共有方式</label>
-								<input type="text" placeholder="请选择共有方式" readonly="readonly"  v-model="item.gyfs1">
+								<input type="text" placeholder="请选择共有方式" readonly="readonly"  v-model="item.gyfs1" unselectable="on" onfocus="this.blur()" readonly="readonly">
 							</p>
 						</div>
                         <div class="bdc-form-input">
                             <p>
                                 <label for="">不动产证号</label>
-                                <input type="text" placeholder="请输入不动产证号" readonly="readonly" v-model="qlrInfo.ybdcqzh">
+                                <input type="text" placeholder="请输入不动产证号" readonly="readonly" v-model="qlrInfo.ybdcqzh" unselectable="on" onfocus="this.blur()" readonly="readonly">
                             </p>
                         </div>
 						<!--扫脸-->
