@@ -10,6 +10,10 @@ import '@/js/util.js'
 import IosSelect from '@/js/select.js'
 import  '@/js/iscroll.js'
 
+
+import VConsole from '@/js/vconsole.min.js'
+let vConsole = new VConsole()
+
 /**html js code*/
 new Vue({
     el: "#app",
@@ -831,7 +835,7 @@ new Vue({
                                 self.qlrInfo.xb = "3";
                                 break;
                             default:
-                                self.qlrInfo.xb = "1";
+                                alert("性别错误");
                                 break;
                         }
                     }
@@ -856,7 +860,7 @@ new Vue({
                                 self.qlrList[index].xb = "3";
                                 break;
                             default:
-                                self.qlrList[index].xb = "1";
+                                alert("性别错误");
                                 break;
                         }
                     }
@@ -890,7 +894,7 @@ new Vue({
                                 self.qlrInfo.gyfs = "3";
                                 break;
                             default:
-                                self.qlrInfo.gyfs = "0";
+                                alert("共有方式错误");
                                 break;
                         }
                     }
@@ -917,7 +921,7 @@ new Vue({
                                 self.qlrList[index].gyfs = "3";
                                 break;
                             default:
-                                self.qlrList[index].gyfs = "";
+                                alert("共有方式错误");
                                 break;
                         }
                     }
