@@ -26,8 +26,8 @@ new Vue({
         // szqxdm:localStorage.getItem("szqxdm"),
 
 
-        userName:"雷鹏" ,
-        idCard:"420621198812171147",
+        userName:"付霞" ,
+        idCard:"42060119621215068X",
         szqxdm:'420600',
         // szqxdm:'420600',
 		tabFlag:0,
@@ -48,7 +48,7 @@ new Vue({
             dz: "",
             sex:'',// 通讯地址
             qlrInfo:"",
-            ybdcqzh:"鄂（2019）襄阳市不动产权第0059020号"
+            ybdcqzh:"鄂（2018）襄阳市不动产权第0060820号"
             // isReadOnly:false
         },
         //共有权利人信息
