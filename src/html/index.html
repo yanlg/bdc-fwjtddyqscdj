@@ -108,9 +108,9 @@
 					</p>
 				</div>
 				<div class="bdc-form-input">
-					<p @click="chooseGyfs('0',0)">
+					<p >
 						<label for="">共有方式</label>
-						<input type="text" placeholder="请选择共有方式" readonly="readonly" v-model="qlrInfo.gyfs1" unselectable="on" onfocus="this.blur()" readonly="readonly">
+						<input type="text" placeholder="请选择共有方式"  v-model="qlrInfo.gyfs1" unselectable="on" onfocus="this.blur()" readonly="readonly">
 					</p>
 				</div>
 				<div class="bdc-form-input">
@@ -157,7 +157,7 @@
 							</p>
 						</div>
 						<div class="bdc-form-input">
-							<p @click="chooseGyfs('1',index)">
+							<p >
 								<label for="">共有方式</label>
 								<input type="text" placeholder="请选择共有方式" readonly="readonly"  v-model="item.gyfs1" unselectable="on" onfocus="this.blur()" readonly="readonly">
 							</p>
