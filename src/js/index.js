@@ -176,7 +176,7 @@ new Vue({
 
             if(item == 1){
                 if(self.qlrInfo.ybdcqzh == ""){
-                    alert('请输入预告登记证明号')
+                    alert('请输入不动产权证号进行查询')
                     return false
                 }
 
