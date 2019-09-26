@@ -183,7 +183,7 @@ new Vue({
         changeTab(item){
             var self= this
             if(!self.isSearch ){
-                
+
                 alert('请输入不动产权证号【点击 查询 按钮进行查询】！！！')
                 return false
             }
@@ -713,7 +713,7 @@ new Vue({
                 dataType : "json",
                 success:function (res) {
                     self.loading = true;
-                    window.location.href = res.redirectInvokeUrl
+                    // window.location.href = res.redirectInvokeUrl
                 },
                 error:function (jqXHR,textStatus,err) {
                     console.log(err)
