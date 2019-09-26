@@ -183,7 +183,8 @@ new Vue({
         changeTab(item){
             var self= this
             debugger
-            if(JSON.stringify(self.bdcxx) == "{}"){
+
+            if(!self.isSearch ){
 
                 alert('请输入不动产权证号【点击 查询 按钮进行查询】！！！')
                 return false
@@ -245,8 +246,8 @@ new Vue({
                     }
                     if(list[count].isFace == 0){
 
-                        alert('请完成当前共有权利人扫脸认证')
-                        return false;
+                        // alert('请完成当前共有权利人扫脸认证')
+                        // return false;
                     }
 
                 }
