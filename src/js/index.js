@@ -183,7 +183,8 @@ new Vue({
         changeTab(item){
             var self= this
             if(!self.isSearch ){
-                alert("请输入不动产权证号进行查询！")
+                
+                alert('请输入不动产权证号【点击 查询 按钮进行查询】！！！')
                 return false
             }
             if(item == 1){
