@@ -713,7 +713,9 @@ new Vue({
                 dataType : "json",
                 success:function (res) {
                     self.loading = true;
-                    // window.location.href = res.redirectInvokeUrl
+                    window.location.href = res.redirectInvokeUrl
+
+                    self.isSearch = true
                 },
                 error:function (jqXHR,textStatus,err) {
                     console.log(err)
