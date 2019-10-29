@@ -142,7 +142,7 @@ new Vue({
         var self = this
         var certify = self.getCookie("certifyId");
 
-        if(certify != null || certify != "" ||certify != undefined){
+        if(certify != null && certify != "" &&certify != undefined){
             self.alifaceReuslt(certify);
         }
         var faceIndex = self.getUrlParams("faceIndex")
