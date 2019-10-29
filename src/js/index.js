@@ -140,6 +140,11 @@ new Vue({
     mounted: function (){
 
         var self = this
+        var certify = self.getCookie("certifyId");
+
+        if(certify != null || certify != "" ||certify != undefined){
+            self.alifaceReuslt(certify);
+        }
         var faceIndex = self.getUrlParams("faceIndex")
         // alert(faceIndex)
             if(faceIndex == -1){
@@ -152,6 +157,37 @@ new Vue({
             }
     },
     methods: {
+        setCookie(name, value){
+            if (value) {
+                var Days = 365
+                var exp = new Date()
+                exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000)
+                document.cookie = name + '=' + escape(value) + ';expires=' + exp.toGMTString()
+            }
+
+        },
+        getCookie(name){
+            if (document.cookie.length > 0) {
+                var begin = document.cookie.indexOf(name + '=')
+                if (begin !== -1) {
+                    begin += name.length + 1 // cookie值的初始位置
+                    var end = document.cookie.indexOf(';', begin) // 结束位置
+                    if (end === -1) {
+                        end = document.cookie.length // 没有;则end为字符串结束位置
+                    }
+                    return unescape(document.cookie.substring(begin, end))
+                }
+            }
+            return null
+        },
+        delCookie (name) {
+            var exp = new Date()
+            exp.setTime(exp.getTime() - 1)
+            var cval = this.setCookie(name)
+            if (cval && cval != null) {
+                document.cookie = name + '=' + cval + ';expires=' + exp.toGMTString()
+            }
+        },
         checkPhone(phone){
             if((/^1[3456789]\d{9}$/.test(phone))){
                 return true;
@@ -435,7 +471,7 @@ new Vue({
                 return false
             }
 
-debugger
+
             console.log(self.qlrInfo.gyfs)
 
             if( !(self.qlrInfo.gyfs == "" ||  self.qlrInfo.gyfs == null)){
@@ -571,36 +607,7 @@ debugger
                 }
             })
         },
-        /**
-         * 权利人信息提交申请：
-         https://xysb.anthb.cn:1502/bdcydysq-server/api/bdcydj/apply/submit
-         请求方式：post
-         请求参数：
-         {
-           "applyInfo": {			// 申请人信息
-             "sqrXm": "王佳",			// 申请人姓名
-             "sqrSfzhm": "42060619870428401X"	// 申请人身份证号
-           },
-           "qlrInfo": {				// 权利人信息
-             "qlrmc": "万国军",			// 权利人名称
-             "xb": "1",				// 性别
-             "zjhm": "420625197506021512",	// 证件号码
-             "dh": "15618994567",		// 电话
-             "gyfs": "0",			// 共有方式，0:单独所有 1:共同共有 2:按份共有 3:其它共有
-             "dz": "万国华的地址"		// 通讯地址
-           },
-           "qlrList": [				// 共有权利人列表(参数说明同上)
-             {
-               "qlrmc": "李从萍",
-               "xb": "1",
-               "zjhm": "420625197002252026",
-               "dh": "15618994568",
-               "gyfs": "0",
-               "dz": "李从华的地址"
-             }
-           ]
-         }
-         * */
+
         postQlrxx(){
             var self = this
 
@@ -754,8 +761,8 @@ debugger
             }
             /**缓存数据到本地*/
             // self.qlrInfo.isReadOnly = true
-            self.qlrList[count].isReadOnly = true
-            self.qlrList[count].isFace = 1
+            // self.qlrList[count].isReadOnly = true
+            // self.qlrList[count].isFace = 1
             // console.log(self.qlrList)
             setTimeout(function () {
                 localStorage.setItem("qlrInfo",JSON.stringify(self.qlrInfo))
@@ -778,9 +785,47 @@ debugger
                 dataType : "json",
                 success:function (res) {
                     self.loading = true;
+                    self.setCookie("certifyId",res.certifyId)
                     window.location.href = res.redirectInvokeUrl
 
                     console.log("刷脸后的数据"+res.qlrInfo)
+
+                },
+                error:function (jqXHR,textStatus,err) {
+                    console.log(err)
+                }
+            })
+        },
+        alifaceReuslt(certifyId){
+            var self = this
+            var count = self.addCount
+            self.loading = true;
+            $.ajax({
+                type:"GET",
+                url:"https://xysb.anthb.cn:1502/bdcyy-server/api/aliAuth/face/result",
+                data:{
+
+                    certifyId:certifyId,
+                },
+                contentType : "application/json",
+                headers: {
+                    // Authorization: "Bearer "+localStorage.getItem('zyyy_id_token')
+                },
+                dataType : "json",
+                success:function (res) {
+
+                    self.loading = false
+
+                    console.log("验证刷脸是否成功"+JSON.stringify(res))
+                    self.delCookie("certifyId");
+
+                    if(res.code == 200){
+                        self.qlrList[count].isReadOnly = true
+                        self.qlrList[count].isFace = 1
+                    }else{
+
+                        self.qlrList[count].isFace = 0
+                    }
 
                 },
                 error:function (jqXHR,textStatus,err) {

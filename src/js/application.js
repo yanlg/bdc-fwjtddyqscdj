@@ -130,7 +130,7 @@ new Vue({
             var self = this;
             $.ajax({
                 type:"GET",
-                url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/aliAuth/zhima",
+                url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/aliAuth/face/authorize",
                 data:{
                     userName:self.userInfo.user_name,
                     idCardNo:self.userInfo.cert_no
