@@ -142,16 +142,15 @@ new Vue({
         var self = this
         var certify = self.getCookie("certifyId");
 
-        if(certify != null && certify != "" &&certify != undefined){
-            self.alifaceReuslt(certify);
-        }
+
         var faceIndex = self.getUrlParams("faceIndex")
-        // alert(faceIndex)
-            if(faceIndex == -1){
-                // self.getObliGator()
+            if(faceIndex == -1 || faceIndex == null || faceIndex == "null" || faceIndex == undefined){
                 console.log('faceIndex:'+faceIndex)
-                // self.getHtInfo()
             }else{
+
+                if(certify != null && certify != "" &&certify != undefined){
+                    self.alifaceReuslt(certify);
+                }
                 self.secondOpenPage()
 
             }
@@ -772,7 +771,7 @@ new Vue({
             // localStorage.setItem("keyIndex",keyIndex)
             $.ajax({
                 type:"GET",
-                url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/aliAuth/zhima",
+                url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/face/authorize",
                 data:{
                     userName:list[count].qlrmc,
                     idCardNo:list[count].zjhm,
@@ -874,6 +873,9 @@ new Vue({
         },
         idcard (val) {
             //去掉所有的空格
+            if(val == "" || val == null || val == undefined || val == "null"){
+                return "暂无数据";
+            }
             const cardNo = val.replace(/\s/g, "");
 
             const info = {
