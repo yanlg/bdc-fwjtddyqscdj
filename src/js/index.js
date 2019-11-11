@@ -771,7 +771,7 @@ new Vue({
             // localStorage.setItem("keyIndex",keyIndex)
             $.ajax({
                 type:"GET",
-                url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/face/authorize",
+                url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/aliAuth/face/authorize",
                 data:{
                     userName:list[count].qlrmc,
                     idCardNo:list[count].zjhm,
