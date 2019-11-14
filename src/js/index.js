@@ -1186,7 +1186,7 @@ new Vue({
         },
         formatYear (nowYear) {
             var arr = [];
-            for (var i = nowYear - 5; i <= nowYear + 50; i++) {
+            for (var i = nowYear - 30; i <= nowYear + 50; i++) {
                 arr.push({
                     id: i + '',
                     value: i + ''
