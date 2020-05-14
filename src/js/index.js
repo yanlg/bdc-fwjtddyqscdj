@@ -11,8 +11,8 @@ import IosSelect from '@/js/select.js'
 import  '@/js/iscroll.js'
 
 
-// import VConsole from '@/js/vconsole.min.js'
-// let vConsole = new VConsole()
+import VConsole from '@/js/vconsole.min.js'
+let vConsole = new VConsole()
 
 /**html js code*/
 new Vue({
@@ -748,6 +748,8 @@ new Vue({
          * */
         alipayFace(index,name,card){
             var self = this;
+            alert(name);
+            alert(card);
             $.ajax({
                 type:"GET",
                 url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/aliAuth/face/authorize",
