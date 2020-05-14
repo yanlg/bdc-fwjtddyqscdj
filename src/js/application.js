@@ -17,7 +17,8 @@ new Vue({
             /*user_name:"万国军",
             cert_no:"420625197506021512"
        */ },
-        loading:false
+        loading:false,
+        sfz:''
     },
     watch:{
         /*isAgree:{
@@ -42,7 +43,10 @@ new Vue({
         // var certNo = localStorage.getItem("certNo")
         /*alert("姓名："+localStorage.getItem("userName"))
         alert("身份证："+localStorage.getItem("certNo"))*/
-        var self = this
+        var self = this;
+        let card = res.data.cert_no.replace(/^(.{6})(?:\w+)(.{4})$/, "$1********$2");
+        this.sfz=card;
+
         var localData = {
             user_name:localStorage.getItem("userName"),
             cert_no:localStorage.getItem("certNo")
