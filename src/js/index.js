@@ -11,8 +11,8 @@ import IosSelect from '@/js/select.js'
 import  '@/js/iscroll.js'
 
 
-import VConsole from '@/js/vconsole.min.js'
-let vConsole = new VConsole()
+// import VConsole from '@/js/vconsole.min.js'
+// let vConsole = new VConsole()
 
 /**html js code*/
 new Vue({

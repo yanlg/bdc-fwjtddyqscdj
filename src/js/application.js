@@ -6,8 +6,8 @@ import $ from '@/js/jquery-3.0.0.min.js'
 import '@/js/reset.js'
 import '@/js/util.js'
 
-import VConsole from '@/js/vconsole.min.js'
-let vConsole = new VConsole()
+// import VConsole from '@/js/vconsole.min.js'
+// let vConsole = new VConsole()
 new Vue({
     el:"#app",
     data:{
