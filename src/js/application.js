@@ -46,7 +46,7 @@ new Vue({
         var self = this;
         // let card = localStorage.getItem("certNo").replace(/^(.{6})(?:\w+)(.{4})$/, "$1********$2");
         // this.sfz=card;
-        let card;
+        let card=localStorage.getItem("certNo");
         card=card.replace(/^(.{6})(?:\w+)(.{4})$/, "$1********$2");
         alert(card);
 
