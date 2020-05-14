@@ -146,44 +146,23 @@ new Vue({
 
         var self = this
         //var certify = self.getCookie("certifyId");
-        if(localStorage.getItem("zsh")){
-
-            self.qlrInfo.ybdcqzh=localStorage.getItem("zsh");
-            alert(self.qlrInfo.ybdcqzh);
-            self.getObliGator();
-        }
-
 
         var faceIndex = self.getUrlParams("faceIndex")
             if(faceIndex == -1 || faceIndex == null || faceIndex == "null" || faceIndex == undefined){
                 console.log('faceIndex:'+faceIndex);
             }else{
                 console.log('faceIndex:'+faceIndex);
-                //localStorage.setItem("qlrInfo",JSON.stringify(self.qlrInfo))
-                //localStorage.setItem("qlrList",JSON.stringify(self.qlrList))
                 self.qlrInfo=JSON.parse(localStorage.getItem("qlrInfo"));
                 self.qlrList=JSON.parse(localStorage.getItem("qlrList"));
                 let index=faceIndex;
 
-                //self.secondOpenPage()
+                self.ywrslzt(index);
 
-                // if(index==10){
-                //
-                //     $(".yz").eq(0).addClass("back");
-                //     $(".yz").eq(0).text("当前义务人人脸信息采集完成");
-                //
-                // }else{
-                //     $(".yz").eq(index+1).addClass("back");
-                //     $(".yz").eq(index+1).text("当前义务人人脸信息采集完成");
-                // }
+                setTimeout(function(){
+                    self.qlrInfo.ybdcqzh=localStorage.getItem("zsh");
 
-                //self.ywrslzt(index);
-
-                // setTimeout(function(){
-                //     // self.qlrInfo.ybdcqzh=localStorage.getItem("zsh");
-                //     // alert(self.qlrInfo.ybdcqzh);
-                //     //self.getObliGator();
-                // },3000);
+                    self.getObliGator();
+                },3000);
 
 
             }
