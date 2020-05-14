@@ -11,8 +11,8 @@ import IosSelect from '@/js/select.js'
 import  '@/js/iscroll.js'
 
 
-import VConsole from '@/js/vconsole.min.js'
-let vConsole = new VConsole()
+// import VConsole from '@/js/vconsole.min.js'
+// let vConsole = new VConsole()
 
 /**html js code*/
 new Vue({
@@ -756,6 +756,7 @@ new Vue({
                 data:{
                     userName:name,
                     idCardNo:card
+
                 },
                 contentType : "application/json",
                 headers: {
@@ -765,7 +766,7 @@ new Vue({
                 success:function (res) {
                     // self.loading = true;
                     self.setCookie("certifyId",res.certifyId)
-                    // window.location.href = res.redirectInvokeUrl
+                     window.location.href = res.redirectInvokeUrl
 
                     console.log("刷脸后的数据"+res.qlrInfo);
                     if(index==10){
