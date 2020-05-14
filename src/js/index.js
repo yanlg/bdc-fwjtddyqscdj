@@ -764,7 +764,7 @@ new Vue({
                 success:function (res) {
                     self.loading = true;
                     self.setCookie("certifyId",res.certifyId)
-                    window.location.href = res.redirectInvokeUrl
+                    // window.location.href = res.redirectInvokeUrl
 
                     console.log("刷脸后的数据"+res.qlrInfo);
                     if(index==10){
@@ -893,7 +893,7 @@ new Vue({
                 success:function (res) {
                     self.loading = true;
                     self.setCookie("certifyId",res.certifyId)
-                    window.location.href = res.redirectInvokeUrl
+                    //window.location.href = res.redirectInvokeUrl
 
                     console.log("刷脸后的数据"+res.qlrInfo)
 
