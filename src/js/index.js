@@ -19,12 +19,14 @@ new Vue({
     el: "#app",
 
     data: {
-        // userName:'赵运涛',
-        // idCard:'420621198403012778',
-        userName:localStorage.getItem("userName") ,
-        idCard:localStorage.getItem("certNo"),
-        szqxdm:localStorage.getItem("szqxdm"),
-
+        userName:'闫龙',
+        idCard:'420621199408112772',
+        // userName:localStorage.getItem("userName") ,
+        // idCard:localStorage.getItem("certNo"),
+       // szqxdm:localStorage.getItem("szqxdm"),
+        szqxdm:'420600',
+        ywrjson:'',
+        ywrid:"",
 
         // userName:"付霞" ,
         // idCard:"42060119621215068X",
@@ -52,6 +54,7 @@ new Vue({
             ybdcqzh:""
             // isReadOnly:false
         },
+        gyywr:[],
         //共有权利人信息
         qlrList:[				// 共有权利人列表(参数说明同上)
 
@@ -260,88 +263,88 @@ new Vue({
                     return false;
                 }
 
-                var list = self.qlrList
-                var count = self.addCount
-
-                if(list[count] != undefined){
-                    if(list[count].qlrmc == undefined || list[count].zjhm == undefined || list[count].dh == undefined  || list[count].gyfs1 == undefined ||
-                        list[count].sex == undefined  || list[count].dz == undefined ||
-                        list[count].qlrmc == "" || list[count].zjhm == "" || list[count].dh == ""  || list[count].gyfs1 == "" ||
-                        list[count].sex == ""  || list[count].dz == "" ){
-                        alert('请完成当前共有权利人信息填写')
-                        return false;
-                    }
-                    if(!self.checkPhone(list[count].dh)){
-                        alert('请输入正确的手机号码')
-                        return false
-                    }
-                    if(list[count].isFace == 0){
-
-                        alert('请完成当前共有权利人扫脸认证')
-                        return false;
-                    }
-
-                }
-
-
-
-
-
-                self.loading = true
-                $.ajax({
-                    type:"GET",
-                    url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/fwjtddyqscdj/queryInfo",
-                    // url:"http://localhost:8085/fwjtddyqscdj-server/api/fwjtddyqscdj/queryInfo",
-                    data:{
-
-                        ybdcqzh:self.qlrInfo.ybdcqzh,
-                        szqxdm:self.szqxdm
-                        // szqxdm:'420600'
-                    },
-                    contentType : "application/json",
-                    headers: {
-                        // Authorization: "Bearer "+localStorage.getItem('zyyy_id_token')
-                    },
-                    dataType : "json",
-                    success:function (res) {
-
-                        if(res.code == 1){
-                            // alert(res.msg)
-                            self.zl = res.data.zl
-                            self.bdcxx = res.data.bdcdata
-                            console.log(self.bdcxx)
-                            self.bdcxx.szqxdm = self.szqxdm
-                            self.loading = false
-
-                            var list = res.data.qlrdata
-                            for(var i=0;i<list.length;i++){
-                                //权利人
-                                if(list[i]['BZ'] == "0"){
-                                    self.qlrxx.QLRMC = list[i].QLRMC;
-                                    self.qlrxx.ZJZL = list[i].ZJZL
-                                    self.qlrxx.ZJHM = list[i].ZJHM
-                                    self.qlrxx.DH = list[i].DH
-                                    self.qlrxx.QLRYZBM = list[i].QLRYZBM
-                                    self.qlrxx.DZ = list[i].DZ
-                                }
-                            }
-                            setTimeout(function () {
-                                self.isFastClick = false;
-                            },2000)
-                        }
-                        else if(res.code == -1){
-                            self.loading = false
-                            alert(res.msg)
-                            setTimeout(function () {
-                                self.isFastClick = false;
-                            },2000)
-                            return false;
-                        }
-                    },
-                    error:function (jqXHR,textStatus,err) {
-                        console.log(err)
-                    }
-                })
+                // var list = self.qlrList
+                // var count = self.addCount
+                //
+                // if(list[count] != undefined){
+                //     if(list[count].qlrmc == undefined || list[count].zjhm == undefined || list[count].dh == undefined  || list[count].gyfs1 == undefined ||
+                //         list[count].sex == undefined  || list[count].dz == undefined ||
+                //         list[count].qlrmc == "" || list[count].zjhm == "" || list[count].dh == ""  || list[count].gyfs1 == "" ||
+                //         list[count].sex == ""  || list[count].dz == "" ){
+                //         alert('请完成当前共有权利人信息填写')
+                //         return false;
+                //     }
+                //     if(!self.checkPhone(list[count].dh)){
+                //         alert('请输入正确的手机号码')
+                //         return false
+                //     }
+                //     if(list[count].isFace == 0){
+                //
+                //         alert('请完成当前共有权利人扫脸认证')
+                //         return false;
+                //     }
+                //
+                // }
+                //
+                //
+                //
+                //
+                //
+                // self.loading = true
+                // $.ajax({
+                //     type:"GET",
+                //     url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/fwjtddyqscdj/queryInfo",
+                //     // url:"http://localhost:8085/fwjtddyqscdj-server/api/fwjtddyqscdj/queryInfo",
+                //     data:{
+                //
+                //         ybdcqzh:self.qlrInfo.ybdcqzh,
+                //         szqxdm:self.szqxdm
+                //         // szqxdm:'420600'
+                //     },
+                //     contentType : "application/json",
+                //     headers: {
+                //         // Authorization: "Bearer "+localStorage.getItem('zyyy_id_token')
+                //     },
+                //     dataType : "json",
+                //     success:function (res) {
+                //
+                //         if(res.code == 1){
+                //             // alert(res.msg)
+                //             self.zl = res.data.zl
+                //             self.bdcxx = res.data.bdcdata
+                //             console.log(self.bdcxx)
+                //             self.bdcxx.szqxdm = self.szqxdm
+                //             self.loading = false
+                //
+                //             var list = res.data.qlrdata
+                //             for(var i=0;i<list.length;i++){
+                //                 //权利人
+                //                 if(list[i]['BZ'] == "0"){
+                //                     self.qlrxx.QLRMC = list[i].QLRMC;
+                //                     self.qlrxx.ZJZL = list[i].ZJZL
+                //                     self.qlrxx.ZJHM = list[i].ZJHM
+                //                     self.qlrxx.DH = list[i].DH
+                //                     self.qlrxx.QLRYZBM = list[i].QLRYZBM
+                //                     self.qlrxx.DZ = list[i].DZ
+                //                 }
+                //             }
+                //             setTimeout(function () {
+                //                 self.isFastClick = false;
+                //             },2000)
+                //         }
+                //         else if(res.code == -1){
+                //             self.loading = false
+                //             alert(res.msg)
+                //             setTimeout(function () {
+                //                 self.isFastClick = false;
+                //             },2000)
+                //             return false;
+                //         }
+                //     },
+                //     error:function (jqXHR,textStatus,err) {
+                //         console.log(err)
+                //     }
+                // })
 
 
 
@@ -482,13 +485,13 @@ new Vue({
 
             $.ajax({
                 type:"GET",
-                url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/fwjtddyqscdj/queryInfo",
-                // url:"http://localhost:8085/fwjtddyqscdj-server/api/fwjtddyqscdj/queryInfo",
+                //url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/fwjtddyqscdj/queryInfo",
+                url:"http://192.168.31.199:8081/fwjtddyqscdj-server/api/fwjtddyqscdj/queryInfo",
                 data:{
 
                     ybdcqzh:self.qlrInfo.ybdcqzh,
-                    szqxdm:self.szqxdm
-                    // szqxdm:'420600'
+                    //szqxdm:self.szqxdm
+                    szqxdm:'420600'
                 },
                 contentType : "application/json",
                 headers: {
@@ -498,49 +501,61 @@ new Vue({
                 success:function (res) {
                     localStorage.setItem("isSearch",true)
 
-                  self.isea
-                    if(res.code == 1){
+
+                    if(res.code == "200"){
                         // alert(res.msg)
-                        self.zl = res.data.zl
-                        self.bdcxx = res.data.bdcdata
-                        console.log(self.bdcxx)
-                        self.bdcxx.szqxdm = self.szqxdm
+                        // self.zl = res.data.zl
+                        //
+                        // console.log(self.bdcxx)
+                        // self.bdcxx.szqxdm = self.szqxdm
+
+                        self.bdcxx = JSON.parse(res.data.bdcData);
                         self.loading = false
 
                         var j = 0;
-                        var list = res.data.qlrdata
+                        var list = res.data.qlrData
                         for(var i=0;i<list.length;i++){
                             //权利人
-                            if(list[i]['BZ'] == "0"){
-                                self.qlrxx.QLRMC = list[i].QLRMC;
-                                self.qlrxx.ZJZL = list[i].ZJZL
-                                self.qlrxx.ZJHM = list[i].ZJHM
-                                self.qlrxx.DH = list[i].DH
-                                self.qlrxx.QLRYZBM = list[i].QLRYZBM
-                                self.qlrxx.DZ = list[i].DZ
+                            if(list[i]['bz'] == "0"){
+                                let ql=JSON.parse(list[i].json);
+                                self.qlrxx.QLRMC = ql.QLRMC;
+                                self.qlrxx.ZJZL = ql.ZJZL
+                                self.qlrxx.ZJHM = ql.ZJHM
+                                self.qlrxx.DH = ql.DH
+                                self.qlrxx.QLRYZBM = ql.QLRYZBM
+                                self.qlrxx.DZ = ql.DZ
                             }else{
                                 //义务人
                                 // if(list[i]['ZJHM'] == self.idCard   ){
-                                if(list[i]['ZJHM'] == self.idCard   ){
-                                    debugger
-                                    self.qlrInfo.qlrmc = list[i].QLRMC
-                                    self.qlrInfo.zjhm = list[i].ZJHM
-                                    self.qlrInfo.sex = self.tanseSex(list[i].XB)
-                                    self.qlrInfo.gyfs1 = self.tansGyfs(list[i].GYFS)
-                                    self.qlrInfo.gyfs = list[i].GYFS
-                                    self.qlrInfo.dh = list[i].DH
-                                    self.qlrInfo.dz = list[i].DZ
+                                let ql=JSON.parse(list[i].json);
+                                if(ql.ZJHM== self.idCard){
+
+                                    self.ywrjson=ql;
+                                    self.ywrid=list[i].id;
+
+                                    self.qlrInfo.qlrmc = ql.QLRMC
+                                    self.qlrInfo.zjhm = ql.ZJHM
+                                    self.qlrInfo.sex = self.tanseSex(ql.XB)
+                                    self.qlrInfo.gyfs1 = self.tansGyfs(ql.GYFS)
+                                    self.qlrInfo.gyfs = ql.GYFS
+                                    self.qlrInfo.dh = ql.DH
+                                    self.qlrInfo.dz = ql.DZ
                                     // self.qlrInfo.ybdcqzh = self.qlrInfo.ybdcqzh
                                 }else{
+                                    self.gyywr.push({
+                                        "id":list[i].id,
+                                        "json":list[i].json,
+                                        "isface":list[i].isface
+                                    })
 
                                     self.showAddContain();
-                                    self.qlrList[j].qlrmc = list[i].QLRMC
-                                    self.qlrList[j].zjhm = list[i].ZJHM
-                                    self.qlrList[j].sex = self.tanseSex(list[i].XB)
-                                    self.qlrList[j].gyfs1 = self.tansGyfs(list[i].GYFS)
-                                    self.qlrList[j].gyfs = list[i].GYFS
-                                    self.qlrList[j].dh = list[i].DH
-                                    self.qlrList[j].dz = list[i].DZ
+                                    self.qlrList[j].qlrmc = ql.QLRMC
+                                    self.qlrList[j].zjhm = ql.ZJHM
+                                    self.qlrList[j].sex = self.tanseSex(ql.XB)
+                                    self.qlrList[j].gyfs1 = self.tansGyfs(ql.GYFS)
+                                    self.qlrList[j].gyfs = ql.GYFS
+                                    self.qlrList[j].dh = ql.DH
+                                    self.qlrList[j].dz = ql.DZ
                                     self.qlrList[j].ybdcqzh = self.qlrInfo.ybdcqzh
 
                                     console.log("查询赋值list"+self.qlrList)
@@ -608,12 +623,52 @@ new Vue({
         },
 
         postQlrxx(){
-            var self = this
+            var self = this;
+            $.ajax({
+                type:"GET",
+                //url:"http://58.19.239.213:7000/fwjtddyqscdj-server/api/fwjtddyqscdj/queryInfo",
+                //url:"http://hbzw-gateway-prod.ehbapp.hubei.gov.cn:8060/b85ab6d2b71741bea802a2243c6ea67589a7b1abda4448deb051308ae4fc9f32",
+                url:'http://192.168.5.125:8081/fwjtddyqscdj-server/api/fwjtddyqscdj/queryInfo',
+                data:{
+                    ybdcqzh:self.qlrInfo.ybdcqzh,
+                    szqxdm:'420600'
+                },
+                contentType : "application/json",
+                dataType : "json",
+                success:function (res) {
+                    if(res.code == "200"){
+                        var list = res.data.qlrData
+                        for(var i=0;i<list.length;i++){
+                            //权利人
+                            if(list[i]['bz'] == "0"){
+                            }else{
+                                //义务人
+                                if(list[i].isface=="0"){
+                                    alert("请保证所有共有人都进行了刷脸与信息确认！");
+                                    return;
+                                }else{
+
+                                    if((i+2)==list.length){
+
+                                        self.tijiao();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                error:function (jqXHR,textStatus,err) {
+                    console.log(err)
+                }
+            })
 
             // self.dydata.bdbzqse = 66;
             // self.dydata.zwlxqxs = "2019-07-11"
             // self.dydata.zwlxqxz = "2019-07-11"
             // self.dydata.dywmj = "137.48"
+
+        },
+        tijiao(){
             if(self.dydata.bdbzqse==''){
                 alert('被担保债券数额不能为空');
                 return ;
@@ -634,14 +689,13 @@ new Vue({
             }
 
             self.loading = true
-            debugger
             self.qlrInfo.slid = self.qlrxx.SLID
             self.dydata.dyfs = self.bdcxx.dyfs
             // var hth =
             $.ajax({
                 type:"POST",
-                url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/fwjtddyqscdj/apply/submit",
-                // url:"http://localhost:8085/fwjtddyqscdj-server/api/fwjtddyqscdj/apply/submit",
+                //url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/fwjtddyqscdj/apply/submit",
+                url:"http://192.168.31.199:8081/fwjtddyqscdj-server/api/fwjtddyqscdj/apply/submit",
                 data:JSON.stringify({
                     applyInfo: {			// 申请人信息
                         sqrXm:self.userName,			// 申请人姓名
@@ -680,8 +734,50 @@ new Vue({
          * 支付宝刷脸认证
          *https://xysb.anthb.cn:1502/bdcydysq-server/api/aliAuth/zhima
          * */
-        alipayFace(index){
+        alipayFace(index,name,card){
             var self = this;
+            $.ajax({
+                type:"GET",
+                url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/aliAuth/face/authorize",
+                data:{
+                    userName:name,
+                    idCardNo:card,
+                    faceIndex:index,
+                },
+                contentType : "application/json",
+                headers: {
+                    // Authorization: "Bearer "+localStorage.getItem('zyyy_id_token')
+                },
+                dataType : "json",
+                success:function (res) {
+                    self.loading = true;
+                    self.setCookie("certifyId",res.certifyId)
+                    window.location.href = res.redirectInvokeUrl
+
+                    console.log("刷脸后的数据"+res.qlrInfo);
+                    if(index==10){
+
+                        $(".yz").eq(0).addClass("back");
+                        $(".yz").eq(0).text("当前义务人人脸信息采集完成");
+
+                    }else{
+                        $(".yz").eq(index+1).addClass("back");
+                        $(".yz").eq(index+1).text("当前义务人人脸信息采集完成");
+                    }
+                    self.ywrslzt(index);
+
+                },
+                error:function (jqXHR,textStatus,err) {
+                    console.log(err)
+                }
+            })
+
+
+
+
+
+
+            return
             // var qlrInfo = self.qlrInfo
             // var qlrList = self.qlrList
             // var keyIndex = index;//当前共享人添加序号
@@ -792,6 +888,58 @@ new Vue({
                 },
                 error:function (jqXHR,textStatus,err) {
                     console.log(err)
+                }
+            })
+        },
+        ywrslzt(e){
+
+            let self=this;
+
+            let id,json;
+            if(e==10){
+                self.ywrjson.DH=self.qlrInfo.dh;
+                self.ywrjson.DZ=self.qlrInfo.dz;
+                id=self.ywrid;
+                json=self.ywrjson;
+            }else{
+                id=self.gyywr[index].id;
+                json=self.gyywr[index].json;
+
+            }
+
+            $.ajax({
+                "type":"POST",
+                // url:"http://58.19.239.213:7000/fwjtddyqscdj-server/api/fwjtddyqscdj/apply/submit",
+                "url":"http://192.168.5.125:8081/fwjtddyqscdj-server/api/fwjtddyqscdj/updateQlrInfo",
+                "data":JSON.stringify({
+                    "id":id,			// 申请人姓名
+                    // "json":{
+                    //     'SXH':self.ywrjson.SXH,
+                    //     'GJ':self.ywrjson.GJ,
+                    //     'DH':self.ywrjson.DH,
+                    //     'QLRMC':self.ywrjson.QLRMC,
+                    //     'BZ':self.ywrjson.BZ,
+                    //     'ZJZL':self.ywrjson.ZJZL,
+                    //     'XB':self.ywrjson.XB,
+                    //     'QLRLX':self.ywrjson.QLRLX,
+                    //     'BDCLX':self.ywrjson.BDCLX,
+                    //     'GYFS':self.ywrjson.GYFS,
+                    //     'ZJHM':self.ywrjson.ZJHM,
+                    //     'DZ':self.qlrInfo.dz
+                    // },	// 申请人身份证号,
+                    "json":json,
+                    "isface":'1'
+                }),
+                // 'processData': false,
+                'contentType': 'application/json',
+                // headers: {'Content-Type':'application/json'},
+
+                success:function (res) {
+                    console.log(res);
+
+                },
+                error:function (jqXHR,textStatus,err) {
+
                 }
             })
         },
