@@ -40,6 +40,7 @@ new Vue({
         year:"",
         isAearch:false,
         zhenghao:"",
+        dlr:0,
         //权利人信息
         qlrInfo: {				// 权利人信息
             qlrmc:localStorage.getItem("userName") || "",			// 权利人名称
@@ -159,15 +160,15 @@ new Vue({
 
                 //self.secondOpenPage()
 
-                if(index==10){
-
-                    $(".yz").eq(0).addClass("back");
-                    $(".yz").eq(0).text("当前义务人人脸信息采集完成");
-
-                }else{
-                    $(".yz").eq(index+1).addClass("back");
-                    $(".yz").eq(index+1).text("当前义务人人脸信息采集完成");
-                }
+                // if(index==10){
+                //
+                //     $(".yz").eq(0).addClass("back");
+                //     $(".yz").eq(0).text("当前义务人人脸信息采集完成");
+                //
+                // }else{
+                //     $(".yz").eq(index+1).addClass("back");
+                //     $(".yz").eq(index+1).text("当前义务人人脸信息采集完成");
+                // }
                 self.ywrslzt(index);
 
             }
@@ -496,14 +497,14 @@ new Vue({
             }
 
 
-            console.log(self.qlrInfo.gyfs)
+            // console.log(self.qlrInfo.gyfs)
 
-            if( !(self.qlrInfo.gyfs == "" ||  self.qlrInfo.gyfs == null)){
-               alert("您已成功查询权利人信息，请勿重复点击")
-                return false
-            }
+            // if( !(self.qlrInfo.gyfs == "" ||  self.qlrInfo.gyfs == null)){
+            //    alert("您已成功查询权利人信息，请勿重复点击")
+            //     return false
+            // }
 
-            self.loading = true
+            self.loading = true;
 
             $.ajax({
                 type:"GET",
@@ -552,7 +553,7 @@ new Vue({
                                 // if(list[i]['ZJHM'] == self.idCard   ){
                                 let ql=JSON.parse(list[i].json);
                                 if(ql.ZJHM== self.idCard){
-
+                                    self.dlr=list[i].isface;
 
                                     self.ywrjson=ql;
                                     self.ywrid=list[i].id;
@@ -849,6 +850,11 @@ new Vue({
 
                 success:function (res) {
                     console.log(res);
+                    if(res.data.code==200){
+                        let da=JSON.parse(localStorage.getItem("qlrInof"));
+                        self.qlrInfo.ybdcqzh=da.ybdcqzh;
+                        self.getObliGator(-1);
+                    }
 
                 },
                 error:function (jqXHR,textStatus,err) {

@@ -119,8 +119,9 @@
 						<input type="text" placeholder="请输入不动产证号"  :readonly="qlrInfo.isReadOnly == true" v-model="qlrInfo.ybdcqzh" unselectable="on" onfocus="this.blur()" readonly="readonly">
 					</p>
 				</div>
-				<div class="bdc-face"  @click="alipayFace(10,qlrInfo.qlrmc,qlrInfo.zjhm)">
-					<p class="no-init-color"><i class="face-icon"></i><span class="yz">去采集当前义务人脸信息</span></p>
+				<div class="bdc-face"   @click="alipayFace(10,qlrInfo.qlrmc,qlrInfo.zjhm)">
+					<p class="no-init-color" v-if="dlr==0"><i class="face-icon"></i><span class="yz">去采集当前义务人脸信息</span></p>
+					<p class="no-init-color" v-if="dlr==1"><i class="face-icon"></i><span class="yz back">当前义务人刷脸完成</span></p>
 				</div>
 				<!--<p style="background-color:#fff;padding:.1rem .3rem;color: #E53030;font-size: .26rem">*(0:单独所有；1:共同共有；2:按份共有；3:其它共有；)</p>-->
 				<!--<div class="add-user" v-if="qlrList.length == 0">-->
