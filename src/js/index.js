@@ -762,7 +762,7 @@ new Vue({
                 },
                 dataType : "json",
                 success:function (res) {
-                    self.loading = true;
+                    // self.loading = true;
                     self.setCookie("certifyId",res.certifyId)
                     // window.location.href = res.redirectInvokeUrl
 
