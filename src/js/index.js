@@ -52,7 +52,7 @@ new Vue({
             dz: "",
             sex:'',// 通讯地址
             qlrInfo:"",
-            ybdcqzh:localStorage.getItem("zsh")
+            ybdcqzh:""
             // isReadOnly:false
         },
         gyywr:[],
@@ -169,13 +169,15 @@ new Vue({
                 //     $(".yz").eq(index+1).addClass("back");
                 //     $(".yz").eq(index+1).text("当前义务人人脸信息采集完成");
                 // }
+                self.qlrInfo=localStorage.getItem("qlrInfo");
+                self.qlrList=localStorage.getItem("qlrList");
                 self.ywrslzt(index);
 
-                setTimeout(function(){
-                    // self.qlrInfo.ybdcqzh=localStorage.getItem("zsh");
-                    // alert(self.qlrInfo.ybdcqzh);
-                    //self.getObliGator();
-                },3000);
+                // setTimeout(function(){
+                //     // self.qlrInfo.ybdcqzh=localStorage.getItem("zsh");
+                //     // alert(self.qlrInfo.ybdcqzh);
+                //     //self.getObliGator();
+                // },3000);
 
 
             }
