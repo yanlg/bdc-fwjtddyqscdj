@@ -147,9 +147,10 @@ new Vue({
         var self = this
         //var certify = self.getCookie("certifyId");
         if(localStorage.getItem("zsh")){
-            alert("不动产权");
+
             self.qlrInfo.ybdcqzh=localStorage.getItem("zsh");
-            //self.getObliGator();
+            alert(self.qlrInfo.ybdcqzh);
+            self.getObliGator();
         }
 
 
