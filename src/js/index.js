@@ -753,8 +753,7 @@ new Vue({
                 url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/aliAuth/face/authorize",
                 data:{
                     userName:name,
-                    idCardNo:card,
-                    faceIndex:index,
+                    idCardNo:card
                 },
                 contentType : "application/json",
                 headers: {
