@@ -164,7 +164,7 @@ new Vue({
                     self.qlrInfo.ybdcqzh=localStorage.getItem("zsh");
 
                     self.getObliGator();
-                },3000);
+                },1000);
 
 
             }
