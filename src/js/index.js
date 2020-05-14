@@ -152,19 +152,19 @@ new Vue({
                 console.log('faceIndex:'+faceIndex);
             }else{
                 console.log('faceIndex:'+faceIndex);
-                self.qlrInfo=JSON.parse(localStorage.getItem("qlrInfo"));
-                self.qlrList=JSON.parse(localStorage.getItem("qlrList"));
-
-                console.log(self.qlrInfo);
-                console.log(self.qlrList);
+                // self.qlrInfo=JSON.parse(localStorage.getItem("qlrInfo"));
+                // self.qlrList=JSON.parse(localStorage.getItem("qlrList"));
+                //
+                // console.log(self.qlrInfo);
+                // console.log(self.qlrList);
                 let index=faceIndex;
                 self.ywrslzt(index);
 
-                // setTimeout(function(){
-                //     self.qlrInfo.ybdcqzh=localStorage.getItem("zsh");
-                //
-                //     self.getObliGator();
-                // },3000);
+                setTimeout(function(){
+                    self.qlrInfo.ybdcqzh=localStorage.getItem("zsh");
+
+                    self.getObliGator();
+                },3000);
 
 
             }
