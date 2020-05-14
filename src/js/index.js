@@ -176,7 +176,7 @@ new Vue({
                 //     $(".yz").eq(index+1).text("当前义务人人脸信息采集完成");
                 // }
 
-                self.ywrslzt(index);
+                //self.ywrslzt(index);
 
                 // setTimeout(function(){
                 //     // self.qlrInfo.ybdcqzh=localStorage.getItem("zsh");
