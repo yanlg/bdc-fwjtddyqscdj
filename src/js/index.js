@@ -27,6 +27,7 @@ new Vue({
         szqxdm:'420600',
         ywrjson:'',
         ywrid:"",
+        srcs:'',
 
         // userName:"付霞" ,
         // idCard:"42060119621215068X",
@@ -803,8 +804,8 @@ new Vue({
                 dataType : "json",
                 success:function (res) {
                     // self.loading = true;
-                    self.setCookie("certifyId",res.certifyId)
-                     window.location.href = res.redirectInvokeUrl
+                   // self.setCookie("certifyId",res.certifyId)
+                     self.srcs = res.redirectInvokeUrl;
 
                     console.log("刷脸后的数据"+res.qlrInfo);
 
