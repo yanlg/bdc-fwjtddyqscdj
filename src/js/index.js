@@ -52,7 +52,7 @@ new Vue({
             dz: "",
             sex:'',// 通讯地址
             qlrInfo:"",
-            ybdcqzh:""
+            ybdcqzh:localStorage.getItem("zsh")
             // isReadOnly:false
         },
         gyywr:[],
@@ -172,8 +172,8 @@ new Vue({
                 self.ywrslzt(index);
 
                 setTimeout(function(){
-                    self.qlrInfo.ybdcqzh=localStorage.getItem("zsh");
-                    alert(self.qlrInfo.ybdcqzh);
+                    // self.qlrInfo.ybdcqzh=localStorage.getItem("zsh");
+                    // alert(self.qlrInfo.ybdcqzh);
                     //self.getObliGator();
                 },3000);
 
