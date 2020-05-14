@@ -19,10 +19,10 @@ new Vue({
     el: "#app",
 
     data: {
-        userName:'闫龙',
-        idCard:'420621199408112772',
-        // userName:localStorage.getItem("userName") ,
-        // idCard:localStorage.getItem("certNo"),
+        // userName:'闫龙',
+        // idCard:'420621199408112772',
+        userName:localStorage.getItem("userName") ,
+        idCard:localStorage.getItem("certNo"),
        // szqxdm:localStorage.getItem("szqxdm"),
         szqxdm:'420600',
         ywrjson:'',
