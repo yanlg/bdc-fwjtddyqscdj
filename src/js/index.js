@@ -144,7 +144,7 @@ new Vue({
     mounted: function (){
 
         var self = this
-        var certify = self.getCookie("certifyId");
+        //var certify = self.getCookie("certifyId");
 
 
         var faceIndex = self.getUrlParams("faceIndex")
@@ -170,11 +170,11 @@ new Vue({
                 //     $(".yz").eq(index+1).text("当前义务人人脸信息采集完成");
                 // }
                 self.ywrslzt(index);
-                alert(localStorage.getItem("zsh"));
+
                 setTimeout(function(){
                     self.qlrInfo.ybdcqzh=localStorage.getItem("zsh");
                     alert(self.qlrInfo.ybdcqzh);
-                    self.getObliGator();
+                    //self.getObliGator();
                 },3000);
 
 
