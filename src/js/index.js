@@ -804,13 +804,13 @@ new Vue({
 
 
         },
-        ywrslzt(e){
+        ywrslzt(index){
 
             let self=this;
 
             let id,json;
 
-            if(e==10){
+            if(index==10){
 
                 id=JSON.parse(localStorage.getItem("ywrid"));
                 json=JSON.parse(localStorage.getItem("ywrjson"));
@@ -851,7 +851,7 @@ new Vue({
                 success:function (res) {
                     console.log(res);
                     if(res.data.code==200){
-                        let da=JSON.parse(localStorage.getItem("qlrInof"));
+                        let da=JSON.parse(localStorage.getItem("qlrInfo"));
                         self.qlrInfo.ybdcqzh=da.ybdcqzh;
                         self.getObliGator(-1);
                     }
