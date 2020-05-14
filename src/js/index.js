@@ -486,6 +486,7 @@ new Vue({
             $.ajax({
                 type:"GET",
                 //url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/fwjtddyqscdj/queryInfo",
+                //url:"http://192.168.31.199:8081/fwjtddyqscdj-server/api/fwjtddyqscdj/queryInfo",
                 url:"http://192.168.31.199:8081/fwjtddyqscdj-server/api/fwjtddyqscdj/queryInfo",
                 data:{
 

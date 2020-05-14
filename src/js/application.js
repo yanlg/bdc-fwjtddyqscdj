@@ -86,7 +86,7 @@ new Vue({
          * */
         getUserInfo(){
             var self = this;
-            //self.loading = true
+            self.loading = true
             var reqUrl = "https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/aliAuth/getAliUserInfo?auth_code="+self.getUrlParams("auth_code")
             //var reqUrl = "https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/aliAuth/getAliUserInfo?auth_code=cc7760c2e7a3460e907fa638a792YX32"
             // var reqUrl = "http://10.10.20.146:8084/api/aliAuth/getAliUserInfo?auth_code=cc7760c2e7a3460e907fa638a792YX32"
