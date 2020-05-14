@@ -5,6 +5,9 @@ import Vue from '@/js/vue.min.js'
 import $ from '@/js/jquery-3.0.0.min.js'
 import '@/js/reset.js'
 import '@/js/util.js'
+
+import VConsole from '@/js/vconsole.min.js'
+let vConsole = new VConsole()
 new Vue({
     el:"#app",
     data:{
@@ -83,7 +86,7 @@ new Vue({
          * */
         getUserInfo(){
             var self = this;
-            self.loading = true
+            //self.loading = true
             var reqUrl = "https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/aliAuth/getAliUserInfo?auth_code="+self.getUrlParams("auth_code")
             // var reqUrl = "http://10.10.20.146:8084/api/aliAuth/getAliUserInfo?auth_code=cc7760c2e7a3460e907fa638a792YX32"
             $.ajax({
