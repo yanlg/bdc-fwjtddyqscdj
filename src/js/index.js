@@ -774,6 +774,10 @@ new Vue({
             localStorage.setItem("ywrjson",JSON.stringify(self.ywrjson))
             localStorage.setItem("ywrid",JSON.stringify(self.ywrid));
 
+            localStorage.setItem("zsh",self.qlrInfo.ybdcqzh);
+
+
+
             $.ajax({
                 type:"GET",
                 url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/aliAuth/face/authorize",
@@ -851,9 +855,10 @@ new Vue({
                 success:function (res) {
                     console.log(res);
                     if(res.data.code==200){
-                        let da=JSON.parse(localStorage.getItem("qlrInfo"));
-                        self.qlrInfo.ybdcqzh=da.ybdcqzh;
-                        self.getObliGator(-1);
+
+                        self.qlrInfo.ybdcqzh=localStorage.getItem("zsh");
+                        alert(self.qlrInfo.ybdcqzh);
+                        self.getObliGator();
                     }
 
                 },
