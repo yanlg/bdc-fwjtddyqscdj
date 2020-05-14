@@ -27,7 +27,7 @@ new Vue({
         szqxdm:'420600',
         ywrjson:'',
         ywrid:"",
-        srcs:'',
+        src:'',
 
         // userName:"付霞" ,
         // idCard:"42060119621215068X",
@@ -146,6 +146,11 @@ new Vue({
 
         var self = this
         //var certify = self.getCookie("certifyId");
+        if(localStorage.getItem("zsh")){
+            alert("不动产权");
+            self.qlrInfo.ybdcqzh=localStorage.getItem("zsh");
+            self.getObliGator();
+        }
 
 
         var faceIndex = self.getUrlParams("faceIndex")
@@ -170,8 +175,7 @@ new Vue({
                 //     $(".yz").eq(index+1).addClass("back");
                 //     $(".yz").eq(index+1).text("当前义务人人脸信息采集完成");
                 // }
-                self.qlrInfo=JSON.parse(localStorage.getItem("qlrInfo"));
-                self.qlrList=JSON.parse(localStorage.getItem("qlrList"));
+
                 self.ywrslzt(index);
 
                 // setTimeout(function(){
@@ -804,8 +808,8 @@ new Vue({
                 dataType : "json",
                 success:function (res) {
                     // self.loading = true;
-                   // self.setCookie("certifyId",res.certifyId)
-                     self.srcs = res.redirectInvokeUrl;
+                    self.setCookie("certifyId",res.certifyId)
+                     window.location.href = res.redirectInvokeUrl;
 
                     console.log("刷脸后的数据"+res.qlrInfo);
 
@@ -867,7 +871,7 @@ new Vue({
                 success:function (res) {
                     console.log(res);
                     if(res.data.code=="200"){
-
+                         location.reload();
 
                     }
 
