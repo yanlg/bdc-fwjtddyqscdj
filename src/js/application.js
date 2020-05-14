@@ -44,7 +44,7 @@ new Vue({
         /*alert("姓名："+localStorage.getItem("userName"))
         alert("身份证："+localStorage.getItem("certNo"))*/
         var self = this;
-        let card = res.data.cert_no.replace(/^(.{6})(?:\w+)(.{4})$/, "$1********$2");
+        let card = localStorage.getItem("certNo").replace(/^(.{6})(?:\w+)(.{4})$/, "$1********$2");
         this.sfz=card;
 
         var localData = {
