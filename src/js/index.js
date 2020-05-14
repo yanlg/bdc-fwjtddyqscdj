@@ -160,6 +160,10 @@ new Vue({
                 let index=faceIndex;
                 self.ywrslzt(index);
 
+                if(index!=10){
+                    $(".yz").eq(index+1).text("当前义务人刷脸完成");
+                }
+
                 setTimeout(function(){
                     self.qlrInfo.ybdcqzh=localStorage.getItem("zsh");
 
