@@ -48,7 +48,9 @@ new Vue({
         // this.sfz=card;
         let card=localStorage.getItem("certNo");
 
-        alert(card);
+        setTimeout(function(){
+            self.sfz=self.userInfo.cert_no.replace(/^(.{6})(?:\w+)(.{4})$/, "$1********$2");
+        },2000);
 
         var localData = {
             user_name:localStorage.getItem("userName"),
