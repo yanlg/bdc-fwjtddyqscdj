@@ -48,10 +48,7 @@ new Vue({
         // this.sfz=card;
         let card=localStorage.getItem("certNo");
 
-        setTimeout(function(){
-            self.sfz=self.userInfo.cert_no.replace(/^(.{6})(?:\w+)(.{4})$/, "$1********$2");
-            //alert(self.sfz);
-        },2000);
+
 
         var localData = {
             user_name:localStorage.getItem("userName"),
@@ -59,6 +56,7 @@ new Vue({
         }
         if(localData.user_name != '' && localData.cert_no != '' && localData.user_name != undefined && localData.cert_no != undefined && localData.user_name != null && localData.cert_no != null){
             self.userInfo = localData;
+            self.sfz=self.userInfo.cert_no.replace(/^(.{6})(?:\w+)(.{4})$/, "$1********$2");
         }else {
             this.getUserInfo()
         }
@@ -118,6 +116,7 @@ new Vue({
                         console.log(res.data.cert_no);
                         localStorage.setItem("userName",res.data.user_name);
                         localStorage.setItem("certNo",res.data.cert_no);
+                        self.sfz=res.data.cert_no.replace(/^(.{6})(?:\w+)(.{4})$/, "$1********$2");
                         self.userInfo = res.data;
                         self.loading = false
                     }
