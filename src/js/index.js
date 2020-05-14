@@ -854,7 +854,7 @@ new Vue({
 
                 success:function (res) {
                     console.log(res);
-                    if(res.data.code==200){
+                    if(res.data.code=="200"){
 
                         self.qlrInfo.ybdcqzh=localStorage.getItem("zsh");
                         alert(self.qlrInfo.ybdcqzh);
