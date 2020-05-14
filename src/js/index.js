@@ -149,7 +149,7 @@ new Vue({
         if(localStorage.getItem("zsh")){
             alert("不动产权");
             self.qlrInfo.ybdcqzh=localStorage.getItem("zsh");
-            self.getObliGator();
+            //self.getObliGator();
         }
 
 
@@ -871,7 +871,7 @@ new Vue({
                 success:function (res) {
                     console.log(res);
                     if(res.data.code=="200"){
-                         location.reload();
+                         //location.reload();
 
                     }
 
