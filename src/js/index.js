@@ -263,6 +263,14 @@ new Vue({
                     return false;
                 }
 
+                    if($(".yz").is(".back")){
+
+
+                    }else{
+                        alert('请完成当前义务人扫脸认证')
+                        return false;
+                    }
+
                 // var list = self.qlrList
                 // var count = self.addCount
                 //
