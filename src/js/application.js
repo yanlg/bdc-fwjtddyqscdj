@@ -50,7 +50,7 @@ new Vue({
 
         setTimeout(function(){
             self.sfz=self.userInfo.cert_no.replace(/^(.{6})(?:\w+)(.{4})$/, "$1********$2");
-            alert(self.sfz);
+            //alert(self.sfz);
         },2000);
 
         var localData = {
