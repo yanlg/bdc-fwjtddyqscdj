@@ -178,8 +178,9 @@ new Vue({
                     self.loading = false;
                     if(res.code == 0){
                         // alert("开启扫脸")
-                        self.alipayFace()
                         localStorage.setItem("szqxdm",res.szqxdm);
+                        self.alipayFace();
+
                     }else{
                         alert(res.msg)
                     }
