@@ -169,8 +169,8 @@ new Vue({
                 //     $(".yz").eq(index+1).addClass("back");
                 //     $(".yz").eq(index+1).text("当前义务人人脸信息采集完成");
                 // }
-                self.qlrInfo=localStorage.getItem("qlrInfo");
-                self.qlrList=localStorage.getItem("qlrList");
+                self.qlrInfo=JSON.parse(localStorage.getItem("qlrInfo"));
+                self.qlrList=JSON.parse(localStorage.getItem("qlrList"));
                 self.ywrslzt(index);
 
                 // setTimeout(function(){
@@ -824,10 +824,12 @@ new Vue({
             let id,json;
 
             if(index==10){
+                $(".yz").eq(0).text("当前义务人刷脸完成");
 
                 id=JSON.parse(localStorage.getItem("ywrid"));
                 json=JSON.parse(localStorage.getItem("ywrjson"));
             }else{
+                $(".yz").eq(index+1).text("当前义务人刷脸完成");
                 self.gyywr=JSON.parse(localStorage.getItem("gyywr"));
                 id=self.gyywr[index].id;
                 json=self.gyywr[index].json;
