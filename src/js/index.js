@@ -539,6 +539,7 @@ new Vue({
                                 let ql=JSON.parse(list[i].json);
                                 if(ql.ZJHM== self.idCard){
 
+
                                     self.ywrjson=ql;
                                     self.ywrid=list[i].id;
 
@@ -551,6 +552,7 @@ new Vue({
                                     self.qlrInfo.dz = ql.DZ
                                     // self.qlrInfo.ybdcqzh = self.qlrInfo.ybdcqzh
                                 }else{
+
                                     self.gyywr.push({
                                         "id":list[i].id,
                                         "json":list[i].json,
@@ -920,7 +922,7 @@ new Vue({
             $.ajax({
                 "type":"POST",
                 // url:"http://58.19.239.213:7000/fwjtddyqscdj-server/api/fwjtddyqscdj/apply/submit",
-                "url":"http://192.168.5.125:8081/fwjtddyqscdj-server/api/fwjtddyqscdj/updateQlrInfo",
+                "url":"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/fwjtddyqscdj/updateQlrInfo",
                 "data":JSON.stringify({
                     "id":id,			// 申请人姓名
                     // "json":{
