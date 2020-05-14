@@ -11,8 +11,8 @@ import IosSelect from '@/js/select.js'
 import  '@/js/iscroll.js'
 
 
-// import VConsole from '@/js/vconsole.min.js'
-// let vConsole = new VConsole()
+import VConsole from '@/js/vconsole.min.js'
+let vConsole = new VConsole()
 
 /**html js code*/
 new Vue({
@@ -148,13 +148,27 @@ new Vue({
 
         var faceIndex = self.getUrlParams("faceIndex")
             if(faceIndex == -1 || faceIndex == null || faceIndex == "null" || faceIndex == undefined){
-                console.log('faceIndex:'+faceIndex)
+                console.log('faceIndex:'+faceIndex);
             }else{
+                console.log('faceIndex:'+faceIndex);
+                //localStorage.setItem("qlrInfo",JSON.stringify(self.qlrInfo))
+                //localStorage.setItem("qlrList",JSON.stringify(self.qlrList))
+                self.qlrInfo=JSON.parse(localStorage.getItem("qlrInfo"));
+                self.qlrList=JSON.parse(localStorage.getItem("qlrList"));
+                let index=faceIndex;
 
-                if(certify != null && certify != "" &&certify != undefined){
-                    self.alifaceReuslt(certify);
+                //self.secondOpenPage()
+
+                if(index==10){
+
+                    $(".yz").eq(0).addClass("back");
+                    $(".yz").eq(0).text("当前义务人人脸信息采集完成");
+
+                }else{
+                    $(".yz").eq(index+1).addClass("back");
+                    $(".yz").eq(index+1).text("当前义务人人脸信息采集完成");
                 }
-                self.secondOpenPage()
+                self.ywrslzt(index);
 
             }
     },
@@ -748,14 +762,24 @@ new Vue({
          * */
         alipayFace(index,name,card){
             var self = this;
-            alert(name);
-            alert(card);
+
+            self.ywrjson.DH=self.qlrInfo.dh;
+            self.ywrjson.DZ=self.qlrInfo.dz;
+
+            localStorage.setItem("qlrInfo",JSON.stringify(self.qlrInfo))
+            localStorage.setItem("qlrList",JSON.stringify(self.qlrList))
+
+            localStorage.setItem("gyywr",JSON.stringify(self.gyywr))
+            localStorage.setItem("ywrjson",JSON.stringify(self.ywrjson))
+            localStorage.setItem("ywrid",JSON.stringify(self.ywrid));
+
             $.ajax({
                 type:"GET",
                 url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/aliAuth/face/authorize",
                 data:{
                     userName:name,
-                    idCardNo:card
+                    idCardNo:card,
+                    faceIndex: index
 
                 },
                 contentType : "application/json",
@@ -769,16 +793,7 @@ new Vue({
                      window.location.href = res.redirectInvokeUrl
 
                     console.log("刷脸后的数据"+res.qlrInfo);
-                    if(index==10){
 
-                        $(".yz").eq(0).addClass("back");
-                        $(".yz").eq(0).text("当前义务人人脸信息采集完成");
-
-                    }else{
-                        $(".yz").eq(index+1).addClass("back");
-                        $(".yz").eq(index+1).text("当前义务人人脸信息采集完成");
-                    }
-                    self.ywrslzt(index);
 
                 },
                 error:function (jqXHR,textStatus,err) {
@@ -787,135 +802,19 @@ new Vue({
             })
 
 
-
-
-
-
-            return
-            // var qlrInfo = self.qlrInfo
-            // var qlrList = self.qlrList
-            // var keyIndex = index;//当前共享人添加序号
-            var list = self.qlrList
-            var count = self.addCount
-            var qlrId = self .qlrInfo.zjhm
-
-
-            // list[count].gyfs1 = 1;
-            // list[count].sex  = "男"
-            // list[count].qlrmc="黄明清"
-            // list[count].zjhm ="420683196509080947"
-            // list[count].dh = "13810234984"
-            // list[count].dz ="湖北省襄阳市"
-
-            console.log(count)
-            if(list[count].qlrmc == ''){
-                alert("请输入共有义务人姓名")
-                return;
-            }
-            if(list[count].zjhm == ''){
-                alert("请输入共有义务人身份证号码")
-                return;
-            }
-            if(!self.idcard(list[count].zjhm).isTrue){
-                alert("共有义务人身份证号码不合法")
-                return;
-            }
-
-            if(list[count].sex == ''){
-                alert("请选择共有义务人性别")
-                return;
-            }
-            if(list[count].dh == ''){
-                alert("请输入共有义务人联系方式")
-                return;
-            }
-            // if(!(/^1[34578]\d{9}$/.test(list[count].dh))){
-            //     alert("义务人联系方式");
-            //     return false;
-            // }
-
-            if(list[count].dz == ''){
-                alert("请输入共有义务人地址")
-                return;
-            }
-            if(list[count].gyfs1 == ''){
-                alert("请选择共有义务人共有方式")
-                return;
-            }
-            /*if(list[count].qlrmc == "" || list[count].zjhm == "" || list[count].dh == "" || list[count].dz == "" || list[count].gyfs == ""){
-                alert("请完成当前共有权利人信息填写");
-                return false;
-            }*/
-
-            if(list.length == 1){
-                var id = list[0].zjhm;
-                if(id == qlrId){
-                    alert("权力人和共有义务人不能重复！")
-                    return false;
-                }
-            }
-            if(list.length>1){
-                for(var i = 0;i<list.length;i++){
-                    list[i].ybdcqzh = self.qlrInfo.ybdcqzh
-                    // alert(1)
-                    var id = list[i].zjhm;
-                    for(var j = 0;j <=i-1;j++){
-                        var id1 = list[j].zjhm
-                        if(id == id1 || id == qlrId || id1 == qlrId){
-                            alert("义务人和共有义务人不能重复！")
-                            return false;
-                        }
-                    }
-                }
-            }
-            /**缓存数据到本地*/
-            // self.qlrInfo.isReadOnly = true
-            // self.qlrList[count].isReadOnly = true
-            // self.qlrList[count].isFace = 1
-            // console.log(self.qlrList)
-            setTimeout(function () {
-                localStorage.setItem("qlrInfo",JSON.stringify(self.qlrInfo))
-                localStorage.setItem("qlrList",JSON.stringify(self.qlrList))
-            },10)
-            // console.log(JSON.parse(localStorage.getItem("qlrInfo").isReadOnly))
-            // localStorage.setItem("keyIndex",keyIndex)
-            $.ajax({
-                type:"GET",
-                url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/aliAuth/face/authorize",
-                data:{
-                    userName:list[count].qlrmc,
-                    idCardNo:list[count].zjhm,
-                    faceIndex:index,
-                },
-                contentType : "application/json",
-                headers: {
-                    // Authorization: "Bearer "+localStorage.getItem('zyyy_id_token')
-                },
-                dataType : "json",
-                success:function (res) {
-                    self.loading = true;
-                    self.setCookie("certifyId",res.certifyId)
-                    //window.location.href = res.redirectInvokeUrl
-
-                    console.log("刷脸后的数据"+res.qlrInfo)
-
-                },
-                error:function (jqXHR,textStatus,err) {
-                    console.log(err)
-                }
-            })
         },
         ywrslzt(e){
 
             let self=this;
 
             let id,json;
+
             if(e==10){
-                self.ywrjson.DH=self.qlrInfo.dh;
-                self.ywrjson.DZ=self.qlrInfo.dz;
-                id=self.ywrid;
-                json=self.ywrjson;
+
+                id=JSON.parse(localStorage.getItem("ywrid"));
+                json=JSON.parse(localStorage.getItem("ywrjson"));
             }else{
+                self.gyywr=JSON.parse(localStorage.getItem("gyywr"));
                 id=self.gyywr[index].id;
                 json=self.gyywr[index].json;
 
