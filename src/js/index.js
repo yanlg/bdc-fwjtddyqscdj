@@ -485,9 +485,9 @@ new Vue({
 
             $.ajax({
                 type:"GET",
-                //url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/fwjtddyqscdj/queryInfo",
+                url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/fwjtddyqscdj/queryInfo",
                 //url:"http://192.168.31.199:8081/fwjtddyqscdj-server/api/fwjtddyqscdj/queryInfo",
-                url:"http://192.168.31.199:8081/fwjtddyqscdj-server/api/fwjtddyqscdj/queryInfo",
+                //url:"http://192.168.31.199:8081/fwjtddyqscdj-server/api/fwjtddyqscdj/queryInfo",
                 data:{
 
                     ybdcqzh:self.qlrInfo.ybdcqzh,
@@ -629,7 +629,7 @@ new Vue({
                 type:"GET",
                 //url:"http://58.19.239.213:7000/fwjtddyqscdj-server/api/fwjtddyqscdj/queryInfo",
                 //url:"http://hbzw-gateway-prod.ehbapp.hubei.gov.cn:8060/b85ab6d2b71741bea802a2243c6ea67589a7b1abda4448deb051308ae4fc9f32",
-                url:'http://192.168.31.199:8081/fwjtddyqscdj-server/api/fwjtddyqscdj/queryInfo',
+                url:'https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/fwjtddyqscdj/queryInfo',
                 data:{
                     ybdcqzh:self.qlrInfo.ybdcqzh,
                     szqxdm:'420600'
@@ -697,7 +697,7 @@ new Vue({
             $.ajax({
                 type:"POST",
                 //url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/fwjtddyqscdj/apply/submit",
-                url:"http://192.168.31.199:8081/fwjtddyqscdj-server/api/fwjtddyqscdj/apply/submit",
+                url:"https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/fwjtddyqscdj/apply/submit",
                 data:JSON.stringify({
                     applyInfo: {			// 申请人信息
                         sqrXm:self.userName,			// 申请人姓名
