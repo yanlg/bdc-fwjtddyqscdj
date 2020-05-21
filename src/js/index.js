@@ -23,8 +23,8 @@ new Vue({
         // idCard:'420621199408112772',
         userName:localStorage.getItem("userName") ,
         idCard:localStorage.getItem("certNo"),
-       // szqxdm:localStorage.getItem("szqxdm"),
-        szqxdm:'420600',
+       szqxdm:localStorage.getItem("szqxdm"),
+        // szqxdm:'420600',
         ywrjson:'',
         ywrid:"",
 
@@ -514,8 +514,8 @@ new Vue({
                 data:{
 
                     ybdcqzh:self.qlrInfo.ybdcqzh,
-                    //szqxdm:self.szqxdm
-                    szqxdm:'420600'
+                    szqxdm:self.szqxdm
+                    //szqxdm:'420600'
                 },
                 contentType : "application/json",
                 headers: {
