@@ -657,7 +657,7 @@ new Vue({
                 url:'https://xysb.anthb.cn:1502/fwjtddyqscdj-server/api/fwjtddyqscdj/queryInfo',
                 data:{
                     ybdcqzh:self.qlrInfo.ybdcqzh,
-                    szqxdm:'420600'
+                    szqxdm:self.szqxdm
                 },
                 contentType : "application/json",
                 dataType : "json",
