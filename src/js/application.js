@@ -17,7 +17,8 @@ new Vue({
             /*user_name:"万国军",
             cert_no:"420625197506021512"
        */ },
-        loading:false
+        loading:false,
+        sfz:''
     },
     watch:{
         /*isAgree:{
@@ -42,13 +43,20 @@ new Vue({
         // var certNo = localStorage.getItem("certNo")
         /*alert("姓名："+localStorage.getItem("userName"))
         alert("身份证："+localStorage.getItem("certNo"))*/
-        var self = this
+        var self = this;
+        // let card = localStorage.getItem("certNo").replace(/^(.{6})(?:\w+)(.{4})$/, "$1********$2");
+        // this.sfz=card;
+        let card=localStorage.getItem("certNo");
+
+
+
         var localData = {
             user_name:localStorage.getItem("userName"),
             cert_no:localStorage.getItem("certNo")
         }
         if(localData.user_name != '' && localData.cert_no != '' && localData.user_name != undefined && localData.cert_no != undefined && localData.user_name != null && localData.cert_no != null){
             self.userInfo = localData;
+            self.sfz=self.userInfo.cert_no.replace(/^(.{6})(?:\w+)(.{4})$/, "$1********$2");
         }else {
             this.getUserInfo()
         }
@@ -108,6 +116,7 @@ new Vue({
                         console.log(res.data.cert_no);
                         localStorage.setItem("userName",res.data.user_name);
                         localStorage.setItem("certNo",res.data.cert_no);
+                        self.sfz=res.data.cert_no.replace(/^(.{6})(?:\w+)(.{4})$/, "$1********$2");
                         self.userInfo = res.data;
                         self.loading = false
                     }
@@ -178,8 +187,9 @@ new Vue({
                     self.loading = false;
                     if(res.code == 0){
                         // alert("开启扫脸")
-                        self.alipayFace()
                         localStorage.setItem("szqxdm",res.szqxdm);
+                        self.alipayFace();
+
                     }else{
                         alert(res.msg)
                     }
