@@ -495,7 +495,8 @@ new Vue({
                 alert('请输入原不动产权证号')
                 return false
             }
-
+            self.qlrInfo.ybdcqzh=self.qlrInfo.ybdcqzh.replace('(', "（");
+            self.qlrInfo.ybdcqzh=self.qlrInfo.ybdcqzh.replace(')', "）");
 
             // console.log(self.qlrInfo.gyfs)
 
