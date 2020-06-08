@@ -154,22 +154,22 @@ new Vue({
                 console.log('faceIndex:'+faceIndex);
                 //localStorage.setItem("qlrInfo",JSON.stringify(self.qlrInfo))
                 //localStorage.setItem("qlrList",JSON.stringify(self.qlrList))
-                // self.qlrInfo=JSON.parse(localStorage.getItem("qlrInfo"));
-                // self.qlrList=JSON.parse(localStorage.getItem("qlrList"));
-
+                self.qlrInfo=JSON.parse(localStorage.getItem("qlrInfo"));
+                self.qlrList=JSON.parse(localStorage.getItem("qlrList"));
                 let index=faceIndex;
+
+                //self.secondOpenPage()
+
+                // if(index==10){
+                //
+                //     $(".yz").eq(0).addClass("back");
+                //     $(".yz").eq(0).text("当前义务人人脸信息采集完成");
+                //
+                // }else{
+                //     $(".yz").eq(index+1).addClass("back");
+                //     $(".yz").eq(index+1).text("当前义务人人脸信息采集完成");
+                // }
                 self.ywrslzt(index);
-
-                if(index!=10){
-                    $(".yz").eq(index+1).text("当前义务人刷脸完成");
-                }
-
-                setTimeout(function(){
-                    self.qlrInfo.ybdcqzh=localStorage.getItem("zsh");
-
-                    self.getObliGator();
-                },1000);
-
 
             }
     },
@@ -816,12 +816,10 @@ new Vue({
             let id,json;
 
             if(index==10){
-                $(".yz").eq(0).text("当前义务人刷脸完成");
 
                 id=JSON.parse(localStorage.getItem("ywrid"));
                 json=JSON.parse(localStorage.getItem("ywrjson"));
             }else{
-                $(".yz").eq(index+1).text("当前义务人刷脸完成");
                 self.gyywr=JSON.parse(localStorage.getItem("gyywr"));
                 id=self.gyywr[index].id;
                 json=self.gyywr[index].json;
@@ -858,8 +856,10 @@ new Vue({
                 success:function (res) {
                     console.log(res);
                     if(res.data.code=="200"){
-                        //location.reload();
 
+                        self.qlrInfo.ybdcqzh=localStorage.getItem("zsh");
+
+                        self.getObliGator();
                     }
 
                 },
@@ -867,7 +867,6 @@ new Vue({
 
                 }
             })
-
         },
         alifaceReuslt(certifyId){
             var self = this
