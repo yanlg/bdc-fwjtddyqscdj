@@ -145,7 +145,8 @@ new Vue({
 
         var self = this
         var certify = self.getCookie("certifyId");
-
+        self.szqxdm= localStorage.getItem("szqxdm");
+        alert(self.szqxdm);
 
         var faceIndex = self.getUrlParams("faceIndex")
             if(faceIndex == -1 || faceIndex == null || faceIndex == "null" || faceIndex == undefined){
