@@ -506,6 +506,9 @@ new Vue({
             // }
 
             self.loading = true;
+            console.log("###################");
+            console.log(self.qlrInfo.ybdcqzh);
+            console.log(self.szqxdm);
 
             $.ajax({
                 type:"GET",
@@ -525,7 +528,7 @@ new Vue({
                 dataType : "json",
                 success:function (res) {
                     localStorage.setItem("isSearch",true)
-
+                    self.loading = false;
 
                     if(res.code == "200"){
                         // alert(res.msg)
@@ -607,6 +610,7 @@ new Vue({
                     }
                 },
                 error:function (jqXHR,textStatus,err) {
+                    self.loading = false
                     console.log(err)
                 }
             })
