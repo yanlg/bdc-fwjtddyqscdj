@@ -527,7 +527,9 @@ new Vue({
                 },
                 dataType : "json",
                 success:function (res) {
-                    localStorage.setItem("isSearch",true)
+                    console.log("@@@@@@@@@@@");
+                    console.log(res);
+                    localStorage.setItem("isSearch",true);
                     self.loading = false;
 
                     if(res.code == "200"){
