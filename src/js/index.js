@@ -529,7 +529,7 @@ new Vue({
                 success:function (res) {
                     console.log("@@@@@@@@@@@");
                     console.log(res);
-                    localStorage.setItem("isSearch",true);
+                    //localStorage.setItem("isSearch",true);
                     self.loading = false;
 
                     if(res.code == "200"){
